@@ -20,6 +20,10 @@ function CreateForm(props) {
         setFoodItem(foodValue)
     }
 
+    const removeFood = (e) => {
+        console.log(e.target)
+    }
+
 
     
 
