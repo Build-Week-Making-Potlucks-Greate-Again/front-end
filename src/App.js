@@ -1,5 +1,4 @@
 
-import './App.css';
 
 import CreatePotLucks from './pages/Create-Pot-Lucks'
 

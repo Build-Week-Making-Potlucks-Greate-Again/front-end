@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
+import * as FaIcons from 'react-icons/fa'
 
 function CreateForm(props) {
 
-    const {values, change} = props;
+    const {values, change, food,submitForm} = props;
 
     const onChange = (e) => {
-        const [value,name] = e.target
-        change(value,name)
+        const {name , value, checked, type} = e.target;
+        const newValue = type === 'checkbox' ? checked : value
+        change(name, newValue)
     }
     
     // Food submitter section start
@@ -20,9 +22,15 @@ function CreateForm(props) {
         setFoodItem(foodValue)
     }
 
-    const removeFood = (e) => {
-        console.log(e.target)
-    }
+    // const removeFood = (e) => {
+    //     console.log(e.target)
+    //     // console.log(e.target.tagName)
+    //     if(e.target.tagName === 'path'){
+    //         // e.target.parentNode.parentNode.innerText === foodItem
+    //         // values.food.splice()
+    //         console.log( values.food.splice(foodItem, 1), ' parrent')
+    //     }
+    // }
 
 
     
@@ -33,7 +41,8 @@ function CreateForm(props) {
             ...foodList,
             foodItem
         ])
-        values.food.push(foodItem)
+        food(foodItem)
+        setFoodItem('')
         console.log('submmit')
     }
     
@@ -41,7 +50,7 @@ function CreateForm(props) {
 
 
     return (
-        <form>
+        <form onSubmit={submitForm}>
             
             <label>
                 Name:
@@ -61,13 +70,14 @@ function CreateForm(props) {
             <div>
                 <label>
                     Food:
-                    <input type="text" onChange={addFood} /><button type="submit" onClick={submitFood} >Add Food</button>
+                    <input type="text" onChange={addFood} value={foodItem} /><button type="submit" onClick={submitFood} >Add Food</button>
                 </label>
                 <ul>
                     {
                         foodList.map(food => {
                             return(
-                                <li>{food}</li>
+                                <li >{food}<FaIcons.FaTrash className="icon" /></li>
+                                
                             )
                         })
                     }
