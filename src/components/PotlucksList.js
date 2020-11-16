@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {} from 'react-router-dom'
 
+import PotluckCard from './PotluckCard'
+
 const dummyData = [{
     "user_id": 123456,
     "name":'Tommy',
@@ -32,7 +34,17 @@ const PotlucksList = (props) => {
     },[])
     return (
         <div className="potlucks-container">
-
+            <p>Potlucks Container</p>
+            <div className="my-potlucks container">
+                {myPotlucks && (
+                    myPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
+                )}
+            </div>
+            <div className="guest-potlucks container">
+                {guestPotlucks && (
+                    guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
+                )}
+            </div>
         </div>
     )
 }
