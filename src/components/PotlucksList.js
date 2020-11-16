@@ -9,6 +9,17 @@ const MainContainer = styled.div`
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+
+    .separating-line {
+        width:  90vw;
+        padding-bottom: 2.5rem;
+        border-bottom: 2px solid black
+    }
+
+    .container {
+        display: flex;
+        flex-flow: row wrap;
+    }
 `
 
 const dummyData = [{
@@ -43,14 +54,15 @@ const PotlucksList = (props) => {
     return (
         <MainContainer className="potlucks-container">
             <p>Potlucks Container</p>
+            <h3>My Potlucks</h3>
             <div className="my-potlucks container">
-                <h3>My Potlucks</h3>
                 {myPotlucks && (
                     myPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
                 )}
             </div>
-            <div className="guest-potlucks container">
+            <span className='separating-line'/>
             <h3>My Friend's Potlucks</h3>
+            <div className="guest-potlucks container">
                 {guestPotlucks && (
                     guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
                 )}
