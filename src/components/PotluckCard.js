@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
-const dummyData = [{
-    "user_id": 123456,
-    "name":'Tommy',
-    "items":['hot dogs', 'dumplings', 'meat buns'],
-    "guests": [1234, 5468, 894],
-    "date":'11-19-2020',
-    "time":'12:00 PM',
-    "location":'Oakdale, Minnesota',
-}]
+const StyledDiv = styled.div`
+    border: 7px solid grey;
+    min-width: 25rem;
+    max-width: 50rem;
+    margin: 0 2rem;
+`
 
 const PotluckCard = (props) => {
     const { name, items, guests, date, time, location } = props.potluckInfo
@@ -19,13 +17,13 @@ const PotluckCard = (props) => {
         // should use guests id to get the name of the users and save to state
     },[])
     return (
-        <div className="potluck-card">
+        <StyledDiv className="potluck-card">
             <p>{name}</p>
             <p>{date}</p>
             <p>{time}</p>
             <p>{location}</p>
-            <p>{items}</p>
-        </div>
+            <p>{items.join(', ')}</p>
+        </StyledDiv>
     )
 }
 

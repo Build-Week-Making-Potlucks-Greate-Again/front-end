@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import {} from 'react-router-dom'
 
 import PotluckCard from './PotluckCard'
+
+const MainContainer = styled.div`
+    /* border: 1px solid red; */
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+`
 
 const dummyData = [{
     "user_id": 123456,
@@ -33,19 +41,21 @@ const PotlucksList = (props) => {
         // set potlucksList to 
     },[])
     return (
-        <div className="potlucks-container">
+        <MainContainer className="potlucks-container">
             <p>Potlucks Container</p>
             <div className="my-potlucks container">
+                <h3>My Potlucks</h3>
                 {myPotlucks && (
                     myPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
                 )}
             </div>
             <div className="guest-potlucks container">
+            <h3>My Friend's Potlucks</h3>
                 {guestPotlucks && (
                     guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
                 )}
             </div>
-        </div>
+        </MainContainer>
     )
 }
 
