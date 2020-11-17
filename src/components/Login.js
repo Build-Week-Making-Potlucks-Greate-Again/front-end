@@ -31,7 +31,7 @@ const Login = (props) => {
         e.preventDefault();
         axiosWithAuth().post('https://mplga-tt-webft-49.herokuapp.com/auth/login', login)//UPDATE URL MAYBE
             .then(req => {
-                localStorage.setItem('token', req.data.payload);
+                localStorage.setItem('token', req.data.token);
                 push('/potlucks') //INSERT PAGE AFTER LOGIN
             })
             .catch(err => console.log(err));
