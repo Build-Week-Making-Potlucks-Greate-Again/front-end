@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from 'styled-components'
 import "./App.css";
 
+import Header from './components/Header'
 import PrivateRoute from './components/PrivateRoute'
 import Login from './components/Login'
 import Register from './components/Register'
@@ -41,8 +42,8 @@ span {
 function App() {
   return (
     <div className="App">
-      <h1>Slow life</h1>
       <Router>
+      <Header />
         <Route exact path='/' render={(props) => {
           return (
             <StyledLoginReg>
