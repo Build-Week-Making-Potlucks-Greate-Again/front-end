@@ -15,7 +15,11 @@ const PotluckCard = (props) => {
     const [ guestList, setGuestList ] = useState([])
 
     const clickHandle = e => {
-        setMoreDetails(!moreDetails);
+        if (e.target.type !== 'checkbox') {
+            setMoreDetails(!moreDetails);
+        } else {
+            return null;
+        }
     }        
 
     useEffect(() => {
@@ -30,7 +34,15 @@ const PotluckCard = (props) => {
                 <div>
                     <p>{time}</p>
                     <p>{location}</p>
-                    <p>{items.join(', ')}</p>
+                    {props.potluckStatus === 'my-potlucks' ? 
+                        <p>{items.join(', ')}</p> : 
+                        items.map(item => 
+                            <div>
+                                <input type="checkbox" id={item} name={item}/>
+                                <label for={item}>{item}</label>
+                            </div>
+                        )
+                    }
                 </div>}
         </StyledDiv>
     )
