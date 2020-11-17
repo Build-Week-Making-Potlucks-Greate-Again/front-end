@@ -72,7 +72,6 @@ const PotlucksList = (props) => {
     },[])
     return (
         <MainContainer className="potlucks-container">
-            <p>Potlucks Container</p>
             <h3>My Potlucks</h3>
             <div className="my-potlucks container">
                 {myPotlucks && (
