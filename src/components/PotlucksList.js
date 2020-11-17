@@ -13,7 +13,7 @@ const MainContainer = styled.div`
     .separating-line {
         width:  90vw;
         padding-bottom: 2.5rem;
-        border-bottom: 2px solid black
+        border-bottom: 2px solid ${pr => pr.theme.primaryColor};
     }
 
     .container {
