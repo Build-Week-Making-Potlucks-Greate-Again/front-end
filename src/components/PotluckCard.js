@@ -10,19 +10,27 @@ const StyledDiv = styled.div`
 
 const PotluckCard = (props) => {
     const { name, items, guests, date, time, location } = props.potluckInfo
+    const [moreDetails, setMoreDetails] = useState(false);
     const [ guestList, setGuestList ] = useState([])
+
+    const clickHandle = e => {
+        setMoreDetails(!moreDetails);
+    }        
 
     useEffect(() => {
         // fetchGuests
         // should use guests id to get the name of the users and save to state
     },[])
     return (
-        <StyledDiv className="potluck-card">
-            <p>{name}</p>
+        <StyledDiv className='potluck-card' onClick={clickHandle}>
+            <h4>{`${name}'s Potluck`}</h4>
             <p>{date}</p>
-            <p>{time}</p>
-            <p>{location}</p>
-            <p>{items.join(', ')}</p>
+            {moreDetails && 
+                <div>
+                    <p>{time}</p>
+                    <p>{location}</p>
+                    <p>{items.join(', ')}</p>
+                </div>}
         </StyledDiv>
     )
 }
