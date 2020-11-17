@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 
+import PrivateRoute from './components/PrivateRoute'
 import Login from './components/Login'
 import Register from './components/Register'
 import PotlucksList from "./components/PotlucksList";
@@ -20,8 +21,8 @@ function App() {
             </>
           )
         }}/>
-        <Route path='/potlucks' component={PotlucksList}/>
-        <Route path='/create-potluck' render={(props) => {
+        <PrivateRoute path='/potlucks' component={PotlucksList}/>
+        <PrivateRoute path='/create-potluck' render={(props) => {
           return (
             <CreatePotLucks {...props}/>
           )
