@@ -12,19 +12,38 @@ const MainContainer = styled.div`
 
     .separating-line {
         width:  90vw;
-        padding-bottom: 2.5rem;
+        margin: 2.5rem auto;
         border-bottom: 2px solid ${pr => pr.theme.primaryColor};
     }
 
     .container {
         display: flex;
         flex-flow: row wrap;
+        align-items: flex-start;
     }
 `
 
 const dummyData = [{
     "user_id": 123456,
-    "name":'Tommy',
+    "name":'Food For Me',
+    "items":['hot dogs', 'dumplings', 'meat buns'],
+    "guests": [1234, 5468, 894],
+    "date":'11-19-2020',
+    "time":'12:00 PM',
+    "location":'Oakdale, Minnesota',
+},
+{
+    "user_id": 123456,
+    "name":'Food For You',
+    "items":['hot dogs', 'dumplings', 'meat buns'],
+    "guests": [1234, 5468, 894],
+    "date":'11-19-2020',
+    "time":'12:00 PM',
+    "location":'Oakdale, Minnesota',
+},
+{
+    "user_id": 123456,
+    "name":'Food For Tommy',
     "items":['hot dogs', 'dumplings', 'meat buns'],
     "guests": [1234, 5468, 894],
     "date":'11-19-2020',

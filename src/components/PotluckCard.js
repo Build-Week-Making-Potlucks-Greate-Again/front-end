@@ -5,7 +5,8 @@ const StyledDiv = styled.div`
     border: 7px solid grey;
     min-width: 25rem;
     max-width: 50rem;
-    margin: 0 2rem;
+    margin: 2rem;
+    padding: .5rem 0;
 `
 
 const PotluckCard = (props) => {
