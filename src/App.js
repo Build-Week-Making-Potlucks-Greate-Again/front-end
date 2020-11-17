@@ -9,12 +9,17 @@ import PotlucksList from "./components/PotlucksList";
 import CreatePotLucks from "./pages/Create-Pot-Lucks";
 
 const StyledLoginReg = styled.div`
-margin-top: 2rem;
+max-width: 70rem;
+margin: 2rem auto;
 display:flex;
+flex-flow: row wrap;
 justify-content: space-evenly;
 
 span {
   border: 1px solid grey;
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 .container {
   margin: 1rem;
