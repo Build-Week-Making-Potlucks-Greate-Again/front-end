@@ -57,14 +57,14 @@ const PotlucksList = (props) => {
             <h3>My Potlucks</h3>
             <div className="my-potlucks container">
                 {myPotlucks && (
-                    myPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
+                    myPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck} potluckStatus='my-potlucks'/>)
                 )}
             </div>
             <span className='separating-line'/>
             <h3>My Friend's Potlucks</h3>
             <div className="guest-potlucks container">
                 {guestPotlucks && (
-                    guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
+                    guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck} potluckStatus='guest-potlucks'/>)
                 )}
             </div>
         </MainContainer>
