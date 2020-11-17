@@ -104,7 +104,6 @@ export default CreateForm
 
 
 
-
   // const removeFood = (e) => {
     //     console.log(e.target)
     //     // console.log(e.target.tagName)
