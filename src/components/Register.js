@@ -57,7 +57,8 @@ const Register = (props) => {
         axios.post('https://mplga-tt-webft-49.herokuapp.com/auth/register', login) //CHECK URL
             .then((res)=>{
                 window.localStorage.setItem('token', res.data.token);
-                push('/potlucks') //INSERT PAGE AFTER LOGIN
+                push('/') //INSERT PAGE AFTER LOGIN
+                console.log(`Success, Please Log-in with registered account`)
             })
             .catch(err => console.log(err));
         
