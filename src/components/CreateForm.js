@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-// import * as FaIcons from 'react-icons/fa'
+import * as FaIcons from 'react-icons/fa'
 
 function CreateForm(props) {
 
@@ -86,7 +86,7 @@ function CreateForm(props) {
                     {
                         comida.map(food => {
                             return(
-                                <li onClick={deleteFood}>{food}</li>
+                                <li onClick={deleteFood}>{food}<FaIcons.FaTrash className="icon" /></li>
                             )
                         })
                     }
@@ -103,7 +103,6 @@ function CreateForm(props) {
 export default CreateForm
 
 
-// <FaIcons.FaTrash className="icon" />
 
   // const removeFood = (e) => {
     //     console.log(e.target)
