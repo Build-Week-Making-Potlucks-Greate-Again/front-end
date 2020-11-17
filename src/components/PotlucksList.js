@@ -60,7 +60,7 @@ const PotlucksList = (props) => {
                     myPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck}/>)
                 )}
             </div>
-            <span className='separating-line'/>
+            {guestPotlucks && <span className='separating-line'/>}
             <h3>My Friend's Potlucks</h3>
             <div className="guest-potlucks container">
                 {guestPotlucks && (

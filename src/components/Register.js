@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import axiosWithAuth from '../validation/AxiosAuthorization';
 import registerSchema from '../validation/registerSchema'
 import * as yup from 'yup'
@@ -14,10 +15,11 @@ const initialErrors = {
     password: '',
 }
 
-const Register = () => {
+const Register = (props) => {
+    const { push } = props.history
     //Declared States
     const [login, setLogin] = useState(initialValues)
-    const [disabled, setDisabled] = useState(valid)
+    const [disabled, setDisabled] = useState(true)
     const [formErrors, setFormErrors] = useState(initialErrors);
     //Check for Input
     const changeHandler = (e) => {
@@ -52,10 +54,10 @@ const Register = () => {
     //On Submit 
     const onSubmit = (e) =>{
         e.preventDefault();
-        axiosWithAuth.post('https://mplga-tt-webft-49.herokuapp.com/auth/register', login) //CHECK URL
+        axios.post('https://mplga-tt-webft-49.herokuapp.com/auth/register', login) //CHECK URL
             .then((res)=>{
                 window.localStorage.setItem('tolken', res.data.access_token);
-                push('/') //INSERT PAGE AFTER LOGIN
+                push('/potlucks') //INSERT PAGE AFTER LOGIN
             })
             .catch(err => console.log(err));
         
@@ -101,3 +103,5 @@ const Register = () => {
         </div>
     )
 }
+
+export default Register
