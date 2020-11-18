@@ -42,9 +42,14 @@ const PotluckCard = (props) => {
                 <div>
                     <p>{time}</p>
                     <p>{location}</p>
-                    {props.potluckStatus === 'my-potlucks' ? 
-                        <p>{items.map((item) => `${item.foodName}, `)}</p> : 
-                        getGuestItemList(items)}
+                    {
+                    props.potluckStatus === 'my-potlucks' ? 
+                        <p>{items.map((item, i) => i !== items.length - 1 ? `${item.foodName}, ` : `${item.foodName}`)}</p> : 
+                        <form>
+                            {getGuestItemList(items)}
+                            <button>Submit</button>
+                        </form>
+                    }
                 </div>}
         </StyledDiv>
     )
