@@ -8,13 +8,22 @@ const StyledDiv = styled.div`
     margin: 0 2rem;
 `
 
+const getGuestItemList = (items) => {
+    return items.map(item => 
+        <span>
+            <input type="checkbox" id={item} name={item}/>
+            <label for={item}>{item}</label>
+        </span>
+    )
+}
+
 const PotluckCard = (props) => {
     const { name, items, guests, date, time, location } = props.potluckInfo
     const [moreDetails, setMoreDetails] = useState(false);
     const [ guestList, setGuestList ] = useState([])
 
     const clickHandle = e => {
-        if (e.target.type !== 'checkbox') {
+        if (e.target.type !== 'checkbox') { //need this conditional otherwise clicking on the checkbox leads to closing the card
             setMoreDetails(!moreDetails);
         } else {
             return null;
@@ -35,12 +44,7 @@ const PotluckCard = (props) => {
                     <p>{location}</p>
                     {props.potluckStatus === 'my-potlucks' ? 
                         <p>{items.join(', ')}</p> : 
-                        items.map(item => 
-                            <div>
-                                <input type="checkbox" id={item} name={item}/>
-                                <label for={item}>{item}</label>
-                            </div>
-                        )
+                        getGuestItemList(items)
                     }
                 </div>}
         </StyledDiv>
