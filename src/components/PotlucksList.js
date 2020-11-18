@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {} from 'react-router-dom'
 
+import axiosWithAuth from '../validation/AxiosAuthorization'
 import { searchUserId, searchUsername } from '../utils/search'
 import PotluckCard from './PotluckCard'
 
