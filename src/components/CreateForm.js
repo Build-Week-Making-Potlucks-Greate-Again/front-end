@@ -1,106 +1,106 @@
-import React, {useState} from 'react'
-import * as FaIcons from 'react-icons/fa'
+    import React, {useState} from 'react'
+    import FoodList from "./FoodList";
 
-function CreateForm(props) {
-
-    const {values, change, food, submitForm, comida} = props;
+    function CreateForm(props) {
+    const { values, change, submit, formValues } = props;
 
     const onChange = (e) => {
-        const {name , value, checked, type} = e.target;
-        const newValue = type === 'checkbox' ? checked : value
-        change(name, newValue)
-    }
+    const { name, value } = e.target;
+    change(name, value);
+    };
 
-    // Food submitter section start
+    // Food Proccessor
+    const [foodItem, setfoodItem] = useState("");
 
-    // const [foodList, setFoodList] = useState([])
-    const [foodItem, setFoodItem] = useState('')
+    const foodChange = (e) => {
+        const { name, value } = e.target;
+        // console.log(name, value);
+        setfoodItem(value);
+    };
 
-
-    const addFood = (e) =>{
-        const foodValue = e.target.value;
-        setFoodItem(foodValue)
-    }
-
-    const deleteFood = (e) => {
+    const foodSubmit = (e) => {
+        e.preventDefault();
         
-        // console.log(e.target.parentNode )
-        // console.log(e.target.parentNode.parentNode.tagName === "LI" )
-        // if(e.target.parentNode.parentNode.tagName === "LI"){
+        change("food", foodItem);
+        setfoodItem("");
+    };
 
-        // }
-    }
+    //  food proccess end
 
-    const submitFood = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
-        food(foodItem)
-        setFoodItem('')
-        console.log('submmit')
+        // foodSubmit()
+
+        submit()
+
+        console.log('submit in createFrom')
     }
-
-
-
-    // food submitter section end
-
-    const submitFormHandle = (e) =>{
-        e.preventDefault();
-        submitForm()
-    }
-
 
     return (
-        <form onSubmit={submitFormHandle}>
-
+        <form  >
             <label>
                 Name:
-                <input type="text" onChange={onChange} name="name" value={values.name} />
+            <input
+                type="text"
+                name="name"
+                value={values.name}
+                onChange={onChange}
+                />
             </label>
-
             <label>
                 PotLuckName:
-                <input type="text" onChange={onChange} name="potLuckName" value={values.potLuckName} />
+                <input
+                type="text"
+                name="PotLuckName"
+                value={values.PotLuckName}
+                onChange={onChange}
+                />
             </label>
-
             <label>
                 Date:
-                <input type="date" name="date" onChange={onChange} value={values.date}/>
+                <input
+                type="date"
+                name="date"
+                onChange={onChange}
+                value={values.date}
+                />
             </label>
-
             <label>
-                Time: 
-                <input type="time" name="time" onChange={onChange} value={values.time} />
+                Time:
+                <input
+                type="time"
+                value={values.time}
+                onChange={onChange}
+                name="time"
+                />
             </label>
-
             <label>
                 Location:
-                <input type="text" name="location" onChange={onChange} value={values.location} />
+                <input type="text" value={values.location} onChange={values.location} name="location" />
             </label>
 
+            {/* Food Proccesser */}
             <div>
                 <label>
-                    Food:
-                    <input type="text" onChange={addFood} value={foodItem} /><button type="submit" onClick={submitFood} >Add Food</button>
+                Food Items:
+                <input
+                    type="text"
+                    name="food"
+                    onChange={foodChange}
+                    value={foodItem}
+                />
+                <button onClick={foodSubmit}>Enter food</button>
                 </label>
-                <ul>
-                    {
-                        comida.map(food => {
-                            return(
-                                <li onClick={deleteFood}>{food}<FaIcons.FaTrash className="icon" /></li>
-                            )
-                        })
-                    }
-                </ul>
+                <FoodList food={values} formValues={formValues} />
             </div>
 
-            
-            <button>Submit</button>
+            <button onClick={onSubmit}>Submit</button>
+            </form>
+        );
+    }
 
-        </form>
-    )
-}
-
-export default CreateForm
+    export default CreateForm
 
 
 
@@ -112,4 +112,12 @@ export default CreateForm
     //         // values.food.splice()
     //         console.log( values.food.splice(foodItem, 1), ' parrent')
     //     }
+    // }
+    // const deleteFood = (e) => {
+    //     const getoId = e.target.parentNode.parentNode.innerText;
+    //     const removedFood = comida.filter((item) => item !== getoId)
+    //     console.log(food({
+    //         ...comida,
+    //         removedFood
+    //     }))
     // }
