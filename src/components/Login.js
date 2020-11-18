@@ -8,9 +8,10 @@ const initialValues = {
 }
 
 const Login = (props) => {
+    const { push } = props.history
     //Declared States
     const [login, setLogin] = useState(initialValues)
-    const [disabled, setDisabled] = useState(valid)
+    const [disabled, setDisabled] = useState(true)
     //Update Changes Hook
     const changeHandler = (e) => {
         e.persist();
@@ -30,14 +31,15 @@ const Login = (props) => {
         e.preventDefault();
         axiosWithAuth().post('https://mplga-tt-webft-49.herokuapp.com/auth/login', login)//UPDATE URL MAYBE
             .then(req => {
-                localStorage.setItem('token', req.data.payload);
-                push('/') //INSERT PAGE AFTER LOGIN
+                localStorage.setItem('token', req.data.token);
+                push('/potlucks') //INSERT PAGE AFTER LOGIN
             })
             .catch(err => console.log(err));
     }
     //Form
     return (
-        <div className='container'>
+        <div className='login container'>
+            <h3>Login</h3>
             <form onSubmit={onSubmit}>
                 <label>
                     Username:
