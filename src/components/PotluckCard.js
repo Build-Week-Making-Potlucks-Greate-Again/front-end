@@ -17,15 +17,13 @@ const PotluckCard = (props) => {
     const [ foodItems, setFoodItems ] = useState(items);
     
     const onChange = e => {
-        // debugger;
         const { name, checked } = e.target;
-        // setFoodItems([...(foodItems.filter(item => name !== item.foodName)), {...(foodItems.filter(item => name === item.foodName)[0]), selected: checked === 'on' ? 1 : 0}])
         setFoodItems([...(foodItems.map(item => {
             if (item.foodName === name) {
                 return {...item, selected: item.selected ? 0 : 1}
             }
             return item;
-        }))])
+        }))]);
     }
     
     const getGuestItemList = (items) => {
