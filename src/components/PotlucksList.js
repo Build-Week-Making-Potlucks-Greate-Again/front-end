@@ -182,7 +182,7 @@ const PotlucksList = (props) => {
             <h3>My Friend's Potlucks</h3>
             <div className="guest-potlucks container">
                 {guestPotlucks && (
-                    guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck} potluckStatus='guest-potlucks'/>)
+                    guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck} setguestPotlucks={setguestPotlucks} potluckStatus='guest-potlucks'/>)
                 )}
             </div>
         </MainContainer>
