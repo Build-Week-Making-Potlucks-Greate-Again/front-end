@@ -8,6 +8,8 @@ const initialValues = {
     email: '',
     username: '',
     password: '',
+    firstname: '',
+    lastname: '',
 }
 const initialErrors = {
     email: '',
@@ -68,6 +70,24 @@ const Register = (props) => {
         <div className='register container'>
             <h3>Register</h3>
             <form onSubmit={onSubmit}>
+                <label>
+                    First Name:
+                    <input 
+                        type='text'
+                        name='firstname'
+                        placeholder='First Name'
+                        value={login.firstname}
+                        onChange={changeHandler} />
+                </label>
+                <label>
+                    Last Name:
+                    <input 
+                        type='text'
+                        name='lastname'
+                        placeholder='Last Name'
+                        value={login.lastname}
+                        onChange={changeHandler} />
+                </label>
                 <label>
                     Email:
                     <input 
