@@ -2,16 +2,15 @@
     import FoodList from "./FoodList";
 
     function CreateForm(props) {
-    const { values, change, submit } = props;
+    const { values, change, submit, formValues } = props;
 
     const onChange = (e) => {
     const { name, value } = e.target;
     change(name, value);
     };
+
     // Food Proccessor
     const [foodItem, setfoodItem] = useState("");
-    const initalFoodList = [];
-    const [foodList, setFoodList] = useState(initalFoodList);
 
     const foodChange = (e) => {
         const { name, value } = e.target;
@@ -21,7 +20,7 @@
 
     const foodSubmit = (e) => {
         e.preventDefault();
-        setFoodList([...foodList, foodItem]);
+        
         change("food", foodItem);
         setfoodItem("");
     };
@@ -29,9 +28,11 @@
     //  food proccess end
 
     const onSubmit = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
 
-        foodSubmit()
+        // foodSubmit()
+
+        submit()
 
         console.log('submit in createFrom')
     }
@@ -74,6 +75,10 @@
                 name="time"
                 />
             </label>
+            <label>
+                Location:
+                <input type="text" value={values.location} onChange={values.location} name="location" />
+            </label>
 
             {/* Food Proccesser */}
             <div>
@@ -87,7 +92,7 @@
                 />
                 <button onClick={foodSubmit}>Enter food</button>
                 </label>
-                <FoodList food={foodList} list={setFoodList} />
+                <FoodList food={values} formValues={formValues} />
             </div>
 
             <button onClick={onSubmit}>Submit</button>

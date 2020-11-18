@@ -1,21 +1,27 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
 
-function FoodList({ food, list }) {
+function FoodList({ food, formValues }) {
+
     const deleteFoodItem = (e) => {
         e.preventDefault();
+
         const btnClick = e.target.parentNode.parentNode.parentNode.innerText
-        // console.log(e.target.parentNode.parentNode.parentNode.innerText, "buttonClick");
 
-        // console.log(e.target.parentNode.parentNode.innerText, "deleteFoodItem");
+        // console.log(food, "deleteFoodItem");
 
-        console.log(food, "deleteFoodItem");
-        list(food.filter((foodItem) => foodItem !== btnClick));
+        formValues({
+            ...food,
+            food: [...food.food.filter((foodItem) => foodItem !== btnClick)]
+        })
+
+        
+
     };
 
     return (
     <ul>
-        {food.map((foodItem) => {
+        {food.food.map((foodItem) => {
         return (
             <li>
             {foodItem}
