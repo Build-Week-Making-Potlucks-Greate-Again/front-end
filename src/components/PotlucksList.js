@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import axiosWithAuth from '../validation/AxiosAuthorization'
 import {} from 'react-router-dom'
 
 import PotluckCard from './PotluckCard'
@@ -67,9 +69,19 @@ const PotlucksList = (props) => {
     // useEffect to call api data from backend
     useEffect(() => {
         // load in potlucks that we have
-        // load in potlucks that we are invited to
-        // set potlucksList to 
+
+        axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/api/potlucks`)
+        .then(res => {
+            console.log(res)
+            //separate potlucks to ones that we were invited to and ones that we are owners of?
+        })
+        .catch(err => {
+            debugger
+            console.log(err)
+        })
+
     },[])
+
     return (
         <MainContainer className="potlucks-container">
             <h3>My Potlucks</h3>
