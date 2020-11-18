@@ -5,7 +5,8 @@ const StyledDiv = styled.div`
     border: 7px solid grey;
     min-width: 25rem;
     max-width: 50rem;
-    margin: 0 2rem;
+    margin: 2rem;
+    padding: .5rem 0;
 `
 
 const PotluckCard = (props) => {
@@ -14,7 +15,11 @@ const PotluckCard = (props) => {
     const [ guestList, setGuestList ] = useState([])
 
     const clickHandle = e => {
-        setMoreDetails(!moreDetails);
+        if (e.target.type !== 'checkbox') {
+            setMoreDetails(!moreDetails);
+        } else {
+            return null;
+        }
     }        
 
     useEffect(() => {
@@ -29,7 +34,15 @@ const PotluckCard = (props) => {
                 <div>
                     <p>{time}</p>
                     <p>{location}</p>
-                    <p>{items.join(', ')}</p>
+                    {props.potluckStatus === 'my-potlucks' ? 
+                        <p>{items.join(', ')}</p> : 
+                        items.map(item => 
+                            <div>
+                                <input type="checkbox" id={item} name={item}/>
+                                <label for={item}>{item}</label>
+                            </div>
+                        )
+                    }
                 </div>}
         </StyledDiv>
     )

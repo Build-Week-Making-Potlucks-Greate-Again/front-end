@@ -25,7 +25,7 @@
         change("food", foodItem);
         setfoodItem("");
     };
-    
+
     //  food proccess end
 
     const onSubmit = (e) => {
@@ -99,8 +99,7 @@
 
 
 
-
-    // const removeFood = (e) => {
+  // const removeFood = (e) => {
     //     console.log(e.target)
     //     // console.log(e.target.tagName)
     //     if(e.target.tagName === 'path'){
