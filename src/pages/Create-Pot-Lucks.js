@@ -38,6 +38,7 @@ function CreatePotLucks() {
             name: formValues.name,
             date: formValues.date,
             time: formValues.time,
+            location: formValues.location,
             PotLuckName: formValues.PotLuckName,
             food: formValues.food
         };
