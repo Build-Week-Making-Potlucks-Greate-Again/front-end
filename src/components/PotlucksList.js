@@ -4,6 +4,7 @@ import axios from 'axios'
 import axiosWithAuth from '../validation/AxiosAuthorization'
 import {} from 'react-router-dom'
 
+import { searchUserId, searchUsername } from '../utils/search'
 import PotluckCard from './PotluckCard'
 
 const MainContainer = styled.div`
@@ -79,6 +80,9 @@ const PotlucksList = (props) => {
             debugger
             console.log(err)
         })
+
+        // searching for id of 1 example
+        searchUserId(1).then(res => console.log(res))
 
     },[])
 
