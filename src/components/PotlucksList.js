@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {} from 'react-router-dom'
 
+import { searchUserId, searchUsername } from '../utils/search'
 import PotluckCard from './PotluckCard'
 
 const MainContainer = styled.div`
@@ -153,6 +154,20 @@ const PotlucksList = (props) => {
         // load in potlucks that we have
         // load in potlucks that we are invited to
         // set potlucksList to 
+
+        axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/api/potlucks`)
+        .then(res => {
+            console.log(res)
+            //separate potlucks to ones that we were invited to and ones that we are owners of?
+        })
+        .catch(err => {
+            debugger
+            console.log(err)
+        })
+
+        // searching for id of 1 example
+        searchUserId(1).then(res => console.log(res))
+
     },[])
     return (
         <MainContainer className="potlucks-container">
