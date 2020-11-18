@@ -8,11 +8,15 @@ const initialValues = {
     email: '',
     username: '',
     password: '',
+    first_name: '',
+    last_name: '',
 }
 const initialErrors = {
     email: '',
     username: '',
     password: '',
+    first_name: '',
+    last_name: '',
 }
 
 const Register = (props) => {
@@ -69,6 +73,24 @@ const Register = (props) => {
             <h3>Register</h3>
             <form onSubmit={onSubmit}>
                 <label>
+                    First Name:
+                    <input 
+                        type='text'
+                        name='first_name'
+                        placeholder='First Name'
+                        value={login.first_name}
+                        onChange={changeHandler} />
+                </label>
+                <label>
+                    Last Name:
+                    <input 
+                        type='text'
+                        name='last_name'
+                        placeholder='Last Name'
+                        value={login.last_name}
+                        onChange={changeHandler} />
+                </label>
+                <label>
                     Email:
                     <input 
                         type='text'
@@ -98,6 +120,8 @@ const Register = (props) => {
                 <button disabled={disabled}>Register</button>
             </form>
             <div className='errors'>
+                <p>{formErrors.first_name}</p>
+                <p>{formErrors.last_name}</p>
                 <p>{formErrors.email}</p>
                 <p>{formErrors.username}</p>
                 <p>{formErrors.password}</p>
