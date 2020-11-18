@@ -54,11 +54,7 @@ function App() {
           )
         }}/>
         <PrivateRoute path='/potlucks' component={PotlucksList}/>
-        <PrivateRoute path='/create-potluck' render={(props) => {
-          return (
-            <CreatePotLucks {...props}/>
-          )
-        }} />
+        <PrivateRoute path='/create-potluck' component={CreatePotLucks} />
       </Router>
     </div>
   );
