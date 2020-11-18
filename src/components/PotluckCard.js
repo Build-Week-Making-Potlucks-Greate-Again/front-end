@@ -5,7 +5,7 @@ const StyledDiv = styled.div`
     border: 7px solid grey;
     min-width: 25rem;
     max-width: 50rem;
-    margin: 0 2rem;
+    margin: 1rem 2rem;
 `
 
 const getGuestItemList = (items) => {
@@ -42,14 +42,9 @@ const PotluckCard = (props) => {
                 <div>
                     <p>{time}</p>
                     <p>{location}</p>
-                    {
-                    props.potluckStatus === 'my-potlucks' ? 
-                        <p>{items.map((item, i) => i !== items.length - 1 ? `${item.foodName}, ` : `${item.foodName}`)}</p> : 
-                        <form>
-                            {getGuestItemList(items)}
-                            <button>Submit</button>
-                        </form>
-                    }
+                    {props.potluckStatus === 'my-potlucks' ? 
+                        <p>{items.map((item) => `${item.foodName}, `)}</p> : 
+                        getGuestItemList(items)}
                 </div>}
         </StyledDiv>
     )
