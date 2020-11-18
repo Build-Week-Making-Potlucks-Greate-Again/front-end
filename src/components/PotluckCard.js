@@ -5,7 +5,7 @@ const StyledDiv = styled.div`
     border: 7px solid grey;
     min-width: 25rem;
     max-width: 50rem;
-    margin: 0 2rem;
+    margin: 1rem 2rem;
 `
 
 const getGuestItemList = (items) => {
