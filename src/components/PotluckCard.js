@@ -5,15 +5,14 @@ const StyledDiv = styled.div`
     border: 7px solid grey;
     min-width: 25rem;
     max-width: 50rem;
-    margin: 2rem;
-    padding: .5rem 0;
+    margin: 0 2rem;
 `
 
 const getGuestItemList = (items) => {
     return items.map(item => 
         <span>
-            <input type="checkbox" id={item} name={item}/>
-            <label for={item}>{item}</label>
+            <input type="checkbox" id={item.selectedBy} name={item.foodName}/>
+            <label for={item.foodName}>{item.foodName}</label>
         </span>
     )
 }
@@ -44,9 +43,8 @@ const PotluckCard = (props) => {
                     <p>{time}</p>
                     <p>{location}</p>
                     {props.potluckStatus === 'my-potlucks' ? 
-                        <p>{items.join(', ')}</p> : 
-                        getGuestItemList(items)
-                    }
+                        <p>{items.map((item) => `${item.foodName}, `)}</p> : 
+                        getGuestItemList(items)}
                 </div>}
         </StyledDiv>
     )

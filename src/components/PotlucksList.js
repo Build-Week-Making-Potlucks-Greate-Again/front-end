@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
-import axiosWithAuth from '../validation/AxiosAuthorization'
 import {} from 'react-router-dom'
 
 import PotluckCard from './PotluckCard'
@@ -28,7 +26,28 @@ const MainContainer = styled.div`
 const dummyData = [{
     "user_id": 123456,
     "name":'Food For Me',
-    "items":['hot dogs', 'dumplings', 'meat buns'],
+    "items":[
+        {
+            foodName: 'cheese',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'hot dogs',
+            selected: 0,
+            selectedBy: null
+        },
+        {
+            foodName: 'dumplings',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'meat buns',
+            selected: 0,
+            selectedBy: null
+        }
+    ],
     "guests": [1234, 5468, 894],
     "date":'11-19-2020',
     "time":'12:00 PM',
@@ -37,7 +56,28 @@ const dummyData = [{
 {
     "user_id": 123456,
     "name":'Food For You',
-    "items":['hot dogs', 'dumplings', 'meat buns'],
+    "items":[
+        {
+            foodName: 'cheese',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'hot dogs',
+            selected: 0,
+            selectedBy: null
+        },
+        {
+            foodName: 'dumplings',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'meat buns',
+            selected: 0,
+            selectedBy: null
+        }
+    ],
     "guests": [1234, 5468, 894],
     "date":'11-19-2020',
     "time":'12:00 PM',
@@ -46,7 +86,28 @@ const dummyData = [{
 {
     "user_id": 123456,
     "name":'Food For Tommy',
-    "items":['hot dogs', 'dumplings', 'meat buns'],
+    "items":[
+        {
+            foodName: 'cheese',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'hot dogs',
+            selected: 0,
+            selectedBy: null
+        },
+        {
+            foodName: 'dumplings',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'meat buns',
+            selected: 0,
+            selectedBy: null
+        }
+    ],
     "guests": [1234, 5468, 894],
     "date":'11-19-2020',
     "time":'12:00 PM',
@@ -55,7 +116,28 @@ const dummyData = [{
 const dummyData2 = [{
     "user_id": 12345,
     "name":'Lilly',
-    "items":['cheese burgers', 'pizza', 'turkey'],
+    "items":[
+        {
+            foodName: 'cheese',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'hot dogs',
+            selected: 0,
+            selectedBy: null
+        },
+        {
+            foodName: 'dumplings',
+            selected: 1,
+            selectedBy: 345
+        },
+        {
+            foodName: 'meat buns',
+            selected: 0,
+            selectedBy: null
+        }
+    ],
     "guests": [123456, 54628, 894],
     "date":'11-22-2020',
     "time":'9:00 PM',
@@ -69,19 +151,9 @@ const PotlucksList = (props) => {
     // useEffect to call api data from backend
     useEffect(() => {
         // load in potlucks that we have
-
-        axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/api/potlucks`)
-        .then(res => {
-            console.log(res)
-            //separate potlucks to ones that we were invited to and ones that we are owners of?
-        })
-        .catch(err => {
-            debugger
-            console.log(err)
-        })
-
+        // load in potlucks that we are invited to
+        // set potlucksList to 
     },[])
-
     return (
         <MainContainer className="potlucks-container">
             <h3>My Potlucks</h3>
