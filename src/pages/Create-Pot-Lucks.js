@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 import {FormContainer} from './CreatePotLuckStyle'
 
 import CreateForm from '../components/CreateForm'
@@ -7,7 +8,7 @@ import CreateForm from '../components/CreateForm'
 
 function CreatePotLucks() {
 
-const initialForm = {
+    const initialForm = {
     name: "",
     date: "",
     time: "",
@@ -18,8 +19,7 @@ const initialForm = {
     };
 
     const [formValues, setFormValues] = useState(initialForm);
-
-    
+    const [potData , setPotData] = useState([])
 
     const formChange = (name, values) => {
         // console.log(name, values);
@@ -42,20 +42,31 @@ const initialForm = {
     };
 
     const formSubmit = () => {
-    const newPotLuck = {
-        name: formValues.name,
-        date: formValues.date,
-        time: formValues.time,
-        location: formValues.location,
-        PotLuckName: formValues.PotLuckName,
-        food: formValues.food,
-        guestList: formValues.guestList
+        const newPotLuck = {
+            name: formValues.name,
+            date: formValues.date,
+            time: formValues.time,
+            location: formValues.location,
+            PotLuckName: formValues.PotLuckName,
+            food: formValues.food,
+            guestList: formValues.guestList
+        };
+
+        // Network Connection 
+        axios.post('https://jsonbox.io/box_079975f97939d478f372', newPotLuck)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+
+        console.log(newPotLuck);
+
+        setFormValues(initialForm);
     };
 
-    console.log(newPotLuck);
-
-    setFormValues(initialForm);
-    };
+    useEffect(() => {
+        axios.get('https://jsonbox.io/box_079975f97939d478f372')
+            .then(res => setPotData(res.data))
+            .catch(err => console.log(err))
+    },[])
 
     return (
     <FormContainer>
@@ -66,6 +77,30 @@ const initialForm = {
         submit={formSubmit}
         formValues={setFormValues}
         />
+        <div className="test">
+                        <h1>Test Data here babie</h1>
+            {
+                potData.map(data => {
+                    return(
+                        <div>
+                            <h4>PotLuckName: {data.PotLuckName}</h4>
+                            <h5>Food list</h5>
+                            {
+                                data.food.map(food => {
+                                    return <p>{food}</p>
+                                })
+                            }
+                            <h6>People: {data.guestList.length} </h6>
+                            {
+                                data.guestList.map( pe => {
+                                    return <p>{pe}</p>
+                                })
+                            }
+                        </div>
+                    )
+                })
+            }
+        </div>
     </FormContainer>
     );
     }
