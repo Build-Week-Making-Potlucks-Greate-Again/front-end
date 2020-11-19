@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const CardContainer = styled.div`
-    border: 7px solid ${pr => pr.theme.secondaryColor};
-    min-width: 25rem;
-    max-width: 50rem;
-    margin: 1rem 2rem;
+    background: ${pr => pr.theme.secondaryColor};
+    /* min-width: 25rem;
+    max-width: 50rem; */
+    width: 100%;
+    padding: 1.5rem 0;
+    /* margin: 0.5rem 2rem; */
+    cursor: pointer;
+
+    &:hover {
+        background: ${pr => pr.theme.tertiaryColor};
+    }
 `
 
 
