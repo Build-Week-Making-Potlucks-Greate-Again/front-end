@@ -50,7 +50,7 @@ const PotluckCard = (props) => {
     },[])
     return (
         <StyledDiv className='potluck-card' onClick={clickHandle}>
-            <h4>{`${name}'s Potluck`}</h4>
+            <h4>{`${name}`}</h4>
             <p>{date}</p>
             {moreDetails && 
                 <div>
