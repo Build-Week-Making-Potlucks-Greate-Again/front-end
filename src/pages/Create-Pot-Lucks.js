@@ -6,14 +6,6 @@ import { searchUsername, searchUserId } from '../utils/search'
 import axiosWithAuth from '../validation/AxiosAuthorization'
 import CreateForm from '../components/CreateForm'
 
-const processDate = (dateString) => {
-    const newDate = dateString.split('-')
-    newDate.push(newDate.splice(0,1)[0])
-    newDate[newDate.length-1] = newDate[newDate.length-1].slice(2,4)
-
-    return newDate.join('.')
-}
-
 function CreatePotLucks() {
 
     const initialForm = {
@@ -66,7 +58,7 @@ function CreatePotLucks() {
 
         const newPotLuck = {
             potluck_name: formValues.PotLuckName,
-            date: processDate(formValues.date),
+            date: formValues.date,
             time: formValues.time,
             location: formValues.location,
             potluck_organizer: formValues.name,
