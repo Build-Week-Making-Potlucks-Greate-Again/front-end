@@ -22,7 +22,9 @@ const PotluckCard = (props) => {
         setFoodItems([...(foodItems.map(item => {
             if (item.food_name === name) {
                 
-                return {...item, ['selected?']: item['selected?'] ? 0 : 1}
+                return {...item, 
+                        ['selected?']: item['selected?'] ? 0 : 1, 
+                        selected_by:(item.selected_by === null ? localStorage.getItem('username') : null)}
             }
             return item;
         }))]);
