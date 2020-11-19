@@ -10,12 +10,11 @@ const MainContainer = styled.div`
     /* border: 1px solid red; */
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: flex-start;
-    padding: 1rem 0;
-    background: ${pr => pr.theme.primaryColor};
+    /* background: ${pr => pr.theme.primaryColor}; */
     color: #ffffff;
-    
+
     .separating-line {
         width:  90vw;
         margin: 2.5rem auto;
@@ -28,13 +27,18 @@ const MainContainer = styled.div`
         flex-flow: column wrap;
         align-items: center;
         justify-content: center;
-        padding: 1rem 0;
+        /* padding: 1rem 0; */
     }
+
     .my-potlucks {
-        width: 85%;
+        width: 100%;
     }
     .guest-potlucks {
-        width: 85%;
+        width: 100%;
+    }
+    h3 {
+        color: black;
+        padding: 1rem 1rem;
     }
 `
 
@@ -94,7 +98,7 @@ const dummyData = [{
         }
     ],
     "guests": [1234, 5468, 894],
-    "date":'11-19-2020',
+    "date":'11-2-2020',
     "time":'12:00 PM',
     "location":'Oakdale, Minnesota',
 },
@@ -124,7 +128,7 @@ const dummyData = [{
         }
     ],
     "guests": [1234, 5468, 894],
-    "date":'11-19-2020',
+    "date":'11-05-2020',
     "time":'12:00 PM',
     "location":'Oakdale, Minnesota',
 }]
