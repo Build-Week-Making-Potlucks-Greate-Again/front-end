@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const StyledDiv = styled.div`
+const CardContainer = styled.div`
     border: 7px solid grey;
     min-width: 25rem;
     max-width: 50rem;
     margin: 1rem 2rem;
 `
-
 
 
 const PotluckCard = (props) => {
@@ -25,15 +24,6 @@ const PotluckCard = (props) => {
             return item;
         }))]);
     }
-    
-    const getGuestItemList = (items) => {
-        return items.map(item => 
-            <span>
-                <input type="checkbox" id={item.selectedBy} name={item.foodName} checked={onChange}/>
-                <label for={item.foodName}>{item.foodName}</label>
-            </span>
-        )
-    }
 
     const clickHandle = e => {
         console.log(items)
@@ -49,7 +39,7 @@ const PotluckCard = (props) => {
         // should use guests id to get the name of the users and save to state
     },[])
     return (
-        <StyledDiv className='potluck-card' onClick={clickHandle}>
+        <CardContainer className='potluck-card' onClick={clickHandle}>
             <h4>{`${name}'s Potluck`}</h4>
             <p>{date}</p>
             {moreDetails && 
@@ -71,7 +61,7 @@ const PotluckCard = (props) => {
                         </form>
                     }
                 </div>}
-        </StyledDiv>
+        </CardContainer>
     )
 }
 
