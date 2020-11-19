@@ -119,7 +119,7 @@ function CreateForm(props) {
         
                 <div className="userInvited">
                     <label>
-                        Add User:
+                        <span>Add User:</span>
                         <input type="text" name="guesList" onChange={userChange} value={user} />
                         <button className="userBtn" onClick={userSubmit} >Add User</button>
                     </label>

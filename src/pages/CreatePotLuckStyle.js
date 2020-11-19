@@ -105,9 +105,19 @@ export const StyledForm = styled.form`
                 display: flex;
                 justify-content: space-evenly;
                 align-self: center;
-                    span {
+                span {
                     flex-basis: 50%;
+                }
+                button{
+                    padding: 5px;
+                    font-size: 1.2rem;
+                    background-color: transparent;
+                    border: none;
+                    color: white;
+                    &:hover{
+                        color: red;
                     }
+                }
             }
         }
     
@@ -123,5 +133,55 @@ export const StyledForm = styled.form`
         background-color: royalblue;
         flex-basis: 100%;
         padding: 10px;
+        
+        label{
+            ${'' /* background-color: orange; */}
+            font-size: 1.2rem;
+            
+            span{
+                margin-right: 10px;
+            }
+            input{
+                padding: 5px;
+            }
+            button{
+                padding: 7px;
+                font-size: 12px;
+                background-color: rgba(255, 217, 0, 0.349);
+                border: none;
+            }
+        }
+        ul{
+            background-color: orange;
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            li{
+                background-color: black;
+                width: 500px;
+                padding: 10px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+
+                span{
+                    font-size: 1.5rem;
+                    text-transform: capitalize;
+                }
+                button{
+                    padding: 5px;
+                    font-size: 1.2rem;
+                    background-color: transparent;
+                    border: none;
+                    color: white;
+                    &:hover{
+                        color: red;
+                    }
+                }
+            }
+        }
     }
 `;
