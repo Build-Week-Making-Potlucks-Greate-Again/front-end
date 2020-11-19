@@ -141,8 +141,12 @@ const PotluckCard = (props) => {
                     name="location"
                     />
                 </label>
+                <div>
+                <button>Submit</button>
+                <button onClick={editPotluck}>Cancel</button>
+                </div>
               </form>
-                <button onClick={saveEdit}>Done Editing</button>
+                
               </>
             ) : (
               <>
