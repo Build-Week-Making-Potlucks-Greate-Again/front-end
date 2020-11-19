@@ -54,7 +54,7 @@ const PotluckCard = (props) => {
                     <p>{time}</p>
                     <p>{location}</p>
                     {props.potluckStatus === 'my-potlucks' ? 
-                        <p>{items.map((item) => `${item.foodName}, `)}</p> : 
+                        <p>{items.map((item, i) => i !== items.length - 1 ? `${item.foodName}, ` : `${item.foodName}`)}</p> : 
                         <form>
                             {foodItems.map(item => 
                                 <span>
