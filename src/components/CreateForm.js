@@ -3,8 +3,10 @@ import {StyledForm} from '../pages/CreatePotLuckStyle'
 import FoodList from "./FoodList";
 import UserList from "./UserList"
 
+import { searchUsername, searchUserId } from '../utils/search'
+
 function CreateForm(props) {
-    const { values, change, submit, formValues } = props;
+    const { values, change, submit, formValues, guestId, setGuestId } = props;
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -39,6 +41,14 @@ function CreateForm(props) {
 
     const userSubmit = (e) => {
         e.preventDefault();
+        // search here
+        searchUsername(user)
+        .then(res => {
+            res.id && setGuestId([...guestId, res.id])
+        })
+
+
+
         change("guestList", user)
         setUser("")
     }
@@ -54,7 +64,7 @@ function CreateForm(props) {
         <StyledForm>
             <div className="container">
                 <div className="mainInfo">
-                <label>
+                {/* <label>
                     Name:
                     <input
                     type="text"
@@ -62,7 +72,7 @@ function CreateForm(props) {
                     value={values.name}
                     onChange={onChange}
                     />
-                </label>
+                </label> */}
                 <label>
                     PotLuckName:
                     <input
@@ -123,7 +133,7 @@ function CreateForm(props) {
                         <input type="text" name="guesList" onChange={userChange} value={user} />
                         <button className="userBtn" onClick={userSubmit} >Add User</button>
                     </label>
-                    <UserList userList={values} formValues={formValues}/>
+                    <UserList guestId={guestId} setGuestId={setGuestId} userList={values} formValues={formValues}/>
                 </div>
             </div>
         
