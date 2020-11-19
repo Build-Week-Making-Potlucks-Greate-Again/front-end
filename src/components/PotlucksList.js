@@ -25,36 +25,6 @@ const MainContainer = styled.div`
     }
 `
 
-// const dummyData2 = [{
-//     "user_id": 12345,
-//     "name":'Lilly',
-//     "items":[
-//         {
-//             foodName: 'cheese',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'hot dogs',
-//             selected: 0,
-//             selectedBy: null
-//         },
-//         {
-//             foodName: 'dumplings',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'meat buns',
-//             selected: 0,
-//             selectedBy: null
-//         }
-//     ],
-//     "guests": [123456, 54628, 894],
-//     "date":'11-22-2020',
-//     "time":'9:00 PM',
-//     "location":'St. Cloud, Minnesota',
-// }]
 
 const PotlucksList = (props) => {
     const [ myPotlucks, setMyPotlucks] = useState([])
@@ -85,9 +55,23 @@ const PotlucksList = (props) => {
         })
 
         // searching for id of 1 example
-        searchUsername(localStorage.getItem('username')).then(res => console.log(res))
+        // searchUsername(localStorage.getItem('username')).then(res => console.log(res))
 
     },[])
+
+    const submitEdit = (arrayOfFoods, id) => {
+
+        setguestPotlucks(guestPotlucks.map(potluck => {
+            if (potluck.id === id){
+                return {...potluck, foodList:arrayOfFoods}
+            }
+            else {
+                return potluck
+            }
+        }))
+        console.log(guestPotlucks)
+    }
+
     return (
         <MainContainer className="potlucks-container">
             <h3>My Potlucks</h3>
@@ -100,7 +84,14 @@ const PotlucksList = (props) => {
             <h3>My Friend's Potlucks</h3>
             <div className="guest-potlucks container">
                 {guestPotlucks && (
-                    guestPotlucks.map(potluck => <PotluckCard key={potluck.id+potluck.date} potluckInfo={potluck} setguestPotlucks={setguestPotlucks} potluckStatus='guest-potlucks'/>)
+                    guestPotlucks
+                    .map(potluck => 
+                    <PotluckCard 
+                    key={potluck.id+potluck.date} 
+                    submitEdit={submitEdit}
+                    potluckInfo={potluck} 
+                    setguestPotlucks={setguestPotlucks} 
+                    potluckStatus='guest-potlucks'/>)
                 )}
             </div>
         </MainContainer>

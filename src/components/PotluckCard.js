@@ -11,29 +11,36 @@ const StyledDiv = styled.div`
 
 
 const PotluckCard = (props) => {
-    const { potluck_name, foodList, guests, date, time, location, setguestPotlucks} = props.potluckInfo
+    const { potluck_name, foodList, guestList, date, time, location, id, organizer} = props.potluckInfo
+    const { submitEdit } = props
     const [moreDetails, setMoreDetails] = useState(false);
-    const [ guestList, setGuestList ] = useState([])
+    // const [ guestList, setGuestList ] = useState([])
     const [ foodItems, setFoodItems ] = useState(foodList);
     
     const onChange = e => {
         const { name, checked } = e.target;
         setFoodItems([...(foodItems.map(item => {
             if (item.food_name === name) {
-                return {...item, selected: item.selected ? 0 : 1}
+                
+                return {...item, ['selected?']: item['selected?'] ? 0 : 1}
             }
             return item;
         }))]);
     }
-    
-    const getGuestItemList = (items) => {
-        return items.map(item => 
-            <span>
-                <input type="checkbox" id={item.selectedBy} name={item.food_name} checked={onChange}/>
-                <label for={item.food_name}>{item.food_name}</label>
-            </span>
-        )
+
+    const onSubmit = e => {
+        e.preventDefault()
+        submitEdit(foodItems, id)
     }
+    
+    // const getGuestItemList = (items) => {
+    //     return items.map(item => 
+    //         <span>
+    //             <input type="checkbox" id={item.selectedBy} name={item.food_name} checked={onChange}/>
+    //             <label for={item.food_name}>{item.food_name}</label>
+    //         </span>
+    //     )
+    // }
 
     const clickHandle = e => {
         // console.log(foodList)
@@ -51,6 +58,7 @@ const PotluckCard = (props) => {
     return (
         <StyledDiv className='potluck-card' onClick={clickHandle}>
             <h4>{`${potluck_name}`}</h4>
+            <h6>{`Organizer: ${organizer}`}</h6>
             <p>{date}</p>
             {moreDetails && 
                 <div>
@@ -58,10 +66,10 @@ const PotluckCard = (props) => {
                     <p>{location}</p>
                     {props.potluckStatus === 'my-potlucks' ? 
                         <p>{foodList.map((item) => `${item.food_name}, `)}</p> : 
-                        <form onSubmit={(e) => e.preventDefault()}>
+                        <form onSubmit={onSubmit}>
                             {foodItems.map(item => 
                                 <span key={item.food_name}>
-                                    <input type="checkbox" id={item.selectedBy} name={item.food_name} checked={item.selected} onChange={onChange}/>
+                                    <input type="checkbox" id={item.selectedBy} name={item.food_name} checked={item['selected?']} onChange={onChange}/>
                                     <label for={item.food_name}>{item.food_name}</label>
                                 </span>
                             )}
