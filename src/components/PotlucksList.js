@@ -35,6 +35,9 @@ const PotlucksList = (props) => {
         // load in potlucks that we have
         // load in potlucks that we are invited to
         // set potlucksList to 
+        axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/auth/users`)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
 
         axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/api/potlucks`)
         .then(res => {
@@ -72,12 +75,21 @@ const PotlucksList = (props) => {
         console.log(guestPotlucks)
     }
 
+    const deletePotluck = (id) => {
+        setMyPotlucks(myPotlucks.filter(potluck => potluck.id !== id))
+    }
+
     return (
         <MainContainer className="potlucks-container">
             <h3>My Potlucks</h3>
             <div className="my-potlucks container">
                 {myPotlucks && (
-                    myPotlucks.map(potluck => <PotluckCard key={potluck.id+potluck.date} potluckInfo={potluck} potluckStatus='my-potlucks'/>)
+                    myPotlucks.map(potluck => 
+                    <PotluckCard 
+                    key={potluck.id+potluck.date} 
+                    potluckInfo={potluck} 
+                    deletePotluck={deletePotluck}
+                    potluckStatus='my-potlucks'/>)
                 )}
             </div>
             {guestPotlucks && <span className='separating-line'/>}
