@@ -32,6 +32,7 @@ const Login = (props) => {
         axiosWithAuth().post('https://mplga-tt-webft-49.herokuapp.com/auth/login', login)//UPDATE URL MAYBE
             .then(req => {
                 localStorage.setItem('token', req.data.token);
+                localStorage.setItem('username', login.username)
                 push('/potlucks') //INSERT PAGE AFTER LOGIN
             })
             .catch(err => console.log(err));

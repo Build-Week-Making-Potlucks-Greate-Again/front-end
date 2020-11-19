@@ -167,7 +167,7 @@ const PotlucksList = (props) => {
         })
 
         // searching for id of 1 example
-        searchUserId(1).then(res => console.log(res))
+        searchUsername(localStorage.getItem('username')).then(res => console.log(res))
 
     },[])
     return (

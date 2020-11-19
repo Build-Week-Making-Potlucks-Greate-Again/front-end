@@ -38,7 +38,10 @@ const Header = (props) => {
             {location.pathname !== '/' 
             ? (
                 <nav className='app-nav'>
-                <Link onClick={() => localStorage.removeItem('token')} to='/' >Logout</Link>
+                <Link onClick={() => {
+                    localStorage.removeItem('username')
+                    localStorage.removeItem('token')
+                    }} to='/' >Logout</Link>
                 <span />
                 <Link to='/potlucks'>My Potlucks</Link>
                 <span />

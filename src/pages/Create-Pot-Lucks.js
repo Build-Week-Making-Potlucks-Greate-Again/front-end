@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import {FormContainer} from './CreatePotLuckStyle'
 
+import { searchUsername, searchUserId } from '../utils/search'
+import axiosWithAuth from '../validation/AxiosAuthorization'
 import CreateForm from '../components/CreateForm'
-
-
 
 function CreatePotLucks() {
 
@@ -20,6 +20,7 @@ function CreatePotLucks() {
 
     const [formValues, setFormValues] = useState(initialForm);
     const [potData , setPotData] = useState([])
+    const [ guestId, setGuestId ] = useState([])
 
     const formChange = (name, values) => {
         // console.log(name, values);
@@ -42,22 +43,54 @@ function CreatePotLucks() {
     };
 
     const formSubmit = () => {
+
+
+        // object that post takes
+        // const postPotluck = {
+        //     potluck_name: 'this potluck',
+        //     date: '12.01.22',
+        //     time: '3:20',
+        //     location: 'someplace',
+        //     potluck_organizer: 6,
+        //     guest_list: [2],
+        //     food_items: ['food1', 'food2', 'food3']
+        // }
+
         const newPotLuck = {
-            name: formValues.name,
+            potluck_name: formValues.PotLuckName,
             date: formValues.date,
             time: formValues.time,
             location: formValues.location,
-            PotLuckName: formValues.PotLuckName,
-            food: formValues.food,
-            guestList: formValues.guestList
-        };
+            potluck_organizer: formValues.name,
+            guest_list: guestId,
+            food_items: formValues.food
+        }
+
+        // const newPotLuck = {
+        //     potluck_name: formValues.PotLuckName,
+        //     date: processDate(formValues.date),
+        //     potluck_organizer: formValues.name,
+        //     time: formValues.time,
+        //     location: formValues.location,
+        //     food_item: formValues.food,
+        //     guest_list: guestId
+        // };
+
+        console.log(newPotLuck);
 
         // Network Connection 
         axios.post('https://jsonbox.io/box_079975f97939d478f372', newPotLuck)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
 
-        console.log(newPotLuck);
+        axiosWithAuth().post(`https://mplga-tt-webft-49.herokuapp.com/api/potluck`, newPotLuck)
+        .then(res => console.log(res.data))
+        .catch(err => {
+            debugger
+            console.log(`Unable to Post Potluck`)
+        })
+
+        
 
         setFormValues(initialForm);
     };
@@ -66,6 +99,14 @@ function CreatePotLucks() {
         axios.get('https://jsonbox.io/box_079975f97939d478f372')
             .then(res => setPotData(res.data))
             .catch(err => console.log(err))
+
+        searchUsername(localStorage.getItem('username'))
+        .then(res => {
+            setFormValues({...formValues, name:res.id})
+        })
+        .catch(err => {
+            console.log(`could not fetch username from localStorage`)
+        })
     },[])
 
     return (
@@ -76,8 +117,10 @@ function CreatePotLucks() {
         change={formChange}
         submit={formSubmit}
         formValues={setFormValues}
+        guestId={guestId}
+        setGuestId={setGuestId}
         />
-        <div className="test">
+        {/* <div className="test">
                         <h1>Test Data here babie</h1>
             {
                 potData.map(data => {
@@ -100,7 +143,7 @@ function CreatePotLucks() {
                     )
                 })
             }
-        </div>
+        </div> */}
     </FormContainer>
     );
     }
