@@ -25,130 +25,10 @@ const MainContainer = styled.div`
     }
 `
 
-const dummyData = [{
-    "user_id": 123456,
-    "name":'Food For Me',
-    "items":[
-        {
-            foodName: 'cheese',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'hot dogs',
-            selected: 0,
-            selectedBy: null
-        },
-        {
-            foodName: 'dumplings',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'meat buns',
-            selected: 0,
-            selectedBy: null
-        }
-    ],
-    "guests": [1234, 5468, 894],
-    "date":'11-19-2020',
-    "time":'12:00 PM',
-    "location":'Oakdale, Minnesota',
-},
-{
-    "user_id": 123456,
-    "name":'Food For You',
-    "items":[
-        {
-            foodName: 'cheese',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'hot dogs',
-            selected: 0,
-            selectedBy: null
-        },
-        {
-            foodName: 'dumplings',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'meat buns',
-            selected: 0,
-            selectedBy: null
-        }
-    ],
-    "guests": [1234, 5468, 894],
-    "date":'11-19-2020',
-    "time":'12:00 PM',
-    "location":'Oakdale, Minnesota',
-},
-{
-    "user_id": 123456,
-    "name":'Food For Tommy',
-    "items":[
-        {
-            foodName: 'cheese',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'hot dogs',
-            selected: 0,
-            selectedBy: null
-        },
-        {
-            foodName: 'dumplings',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'meat buns',
-            selected: 0,
-            selectedBy: null
-        }
-    ],
-    "guests": [1234, 5468, 894],
-    "date":'11-19-2020',
-    "time":'12:00 PM',
-    "location":'Oakdale, Minnesota',
-}]
-const dummyData2 = [{
-    "user_id": 12345,
-    "name":'Lilly',
-    "items":[
-        {
-            foodName: 'cheese',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'hot dogs',
-            selected: 0,
-            selectedBy: null
-        },
-        {
-            foodName: 'dumplings',
-            selected: 1,
-            selectedBy: 345
-        },
-        {
-            foodName: 'meat buns',
-            selected: 0,
-            selectedBy: null
-        }
-    ],
-    "guests": [123456, 54628, 894],
-    "date":'11-22-2020',
-    "time":'9:00 PM',
-    "location":'St. Cloud, Minnesota',
-}]
 
 const PotlucksList = (props) => {
-    const [ myPotlucks, setMyPotlucks] = useState(dummyData)
-    const [ guestPotlucks, setguestPotlucks] = useState(dummyData2)
+    const [ myPotlucks, setMyPotlucks] = useState([])
+    const [ guestPotlucks, setguestPotlucks] = useState([])
 
     // useEffect to call api data from backend
     useEffect(() => {
@@ -158,8 +38,16 @@ const PotlucksList = (props) => {
 
         axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/api/potlucks`)
         .then(res => {
-            console.log(res)
+            
             //separate potlucks to ones that we were invited to and ones that we are owners of?
+            const user = localStorage.getItem('username')
+            console.log(res.data)
+            console.log(res.data.allPotlucks.filter(potluck => potluck.organizer === user))
+            setMyPotlucks(res.data.allPotlucks.filter(potluck => potluck.organizer === user))
+
+            console.log(res.data.allPotlucks.filter(potluck => potluck.guestList.some(guest => guest.username === user)))
+            setguestPotlucks(res.data.allPotlucks.filter(potluck => potluck.guestList.some(guest => guest.username === user)))
+            
         })
         .catch(err => {
             debugger
@@ -167,22 +55,43 @@ const PotlucksList = (props) => {
         })
 
         // searching for id of 1 example
-        searchUsername(localStorage.getItem('username')).then(res => console.log(res))
+        // searchUsername(localStorage.getItem('username')).then(res => console.log(res))
 
     },[])
+
+    const submitEdit = (arrayOfFoods, id) => {
+
+        setguestPotlucks(guestPotlucks.map(potluck => {
+            if (potluck.id === id){
+                return {...potluck, foodList:arrayOfFoods}
+            }
+            else {
+                return potluck
+            }
+        }))
+        console.log(guestPotlucks)
+    }
+
     return (
         <MainContainer className="potlucks-container">
             <h3>My Potlucks</h3>
             <div className="my-potlucks container">
                 {myPotlucks && (
-                    myPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck} potluckStatus='my-potlucks'/>)
+                    myPotlucks.map(potluck => <PotluckCard key={potluck.id+potluck.date} potluckInfo={potluck} potluckStatus='my-potlucks'/>)
                 )}
             </div>
             {guestPotlucks && <span className='separating-line'/>}
             <h3>My Friend's Potlucks</h3>
             <div className="guest-potlucks container">
                 {guestPotlucks && (
-                    guestPotlucks.map(potluck => <PotluckCard key={potluck.user_id+potluck.name} potluckInfo={potluck} setguestPotlucks={setguestPotlucks} potluckStatus='guest-potlucks'/>)
+                    guestPotlucks
+                    .map(potluck => 
+                    <PotluckCard 
+                    key={potluck.id+potluck.date} 
+                    submitEdit={submitEdit}
+                    potluckInfo={potluck} 
+                    setguestPotlucks={setguestPotlucks} 
+                    potluckStatus='guest-potlucks'/>)
                 )}
             </div>
         </MainContainer>
