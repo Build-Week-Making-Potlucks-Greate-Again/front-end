@@ -10,12 +10,15 @@ const MainContainer = styled.div`
     /* border: 1px solid red; */
     display: flex;
     flex-flow: column wrap;
+    justify-content: center;
     align-items: center;
+    background: ${pr => pr.theme.primaryColor};
+    color: #ffffff;
 
     .separating-line {
         width:  90vw;
         margin: 2.5rem auto;
-        border-bottom: 2px solid ${pr => pr.theme.primaryColor};
+        border-bottom: 2px solid ${pr => pr.theme.secondaryColor};
     }
 
     .container {

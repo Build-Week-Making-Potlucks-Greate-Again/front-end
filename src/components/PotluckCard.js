@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const CardContainer = styled.div`
-    border: 7px solid grey;
+    border: 7px solid ${pr => pr.theme.secondaryColor};
     min-width: 25rem;
     max-width: 50rem;
     margin: 1rem 2rem;
