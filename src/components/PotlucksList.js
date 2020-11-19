@@ -25,96 +25,6 @@ const MainContainer = styled.div`
     }
 `
 
-// const dummyData = [{
-//     "user_id": 123456,
-//     "name":'Food For Me',
-//     "items":[
-//         {
-//             foodName: 'cheese',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'hot dogs',
-//             selected: 0,
-//             selectedBy: null
-//         },
-//         {
-//             foodName: 'dumplings',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'meat buns',
-//             selected: 0,
-//             selectedBy: null
-//         }
-//     ],
-//     "guests": [1234, 5468, 894],
-//     "date":'11-19-2020',
-//     "time":'12:00 PM',
-//     "location":'Oakdale, Minnesota',
-// },
-// {
-//     "user_id": 123456,
-//     "name":'Food For You',
-//     "items":[
-//         {
-//             foodName: 'cheese',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'hot dogs',
-//             selected: 0,
-//             selectedBy: null
-//         },
-//         {
-//             foodName: 'dumplings',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'meat buns',
-//             selected: 0,
-//             selectedBy: null
-//         }
-//     ],
-//     "guests": [1234, 5468, 894],
-//     "date":'11-19-2020',
-//     "time":'12:00 PM',
-//     "location":'Oakdale, Minnesota',
-// },
-// {
-//     "user_id": 123456,
-//     "name":'Food For Tommy',
-//     "items":[
-//         {
-//             foodName: 'cheese',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'hot dogs',
-//             selected: 0,
-//             selectedBy: null
-//         },
-//         {
-//             foodName: 'dumplings',
-//             selected: 1,
-//             selectedBy: 345
-//         },
-//         {
-//             foodName: 'meat buns',
-//             selected: 0,
-//             selectedBy: null
-//         }
-//     ],
-//     "guests": [1234, 5468, 894],
-//     "date":'11-19-2020',
-//     "time":'12:00 PM',
-//     "location":'Oakdale, Minnesota',
-// }]
 // const dummyData2 = [{
 //     "user_id": 12345,
 //     "name":'Lilly',
@@ -164,6 +74,9 @@ const PotlucksList = (props) => {
             console.log(res.data)
             console.log(res.data.allPotlucks.filter(potluck => potluck.organizer === user))
             setMyPotlucks(res.data.allPotlucks.filter(potluck => potluck.organizer === user))
+
+            console.log(res.data.allPotlucks.filter(potluck => potluck.guestList.some(guest => guest.username === user)))
+            setguestPotlucks(res.data.allPotlucks.filter(potluck => potluck.guestList.some(guest => guest.username === user)))
             
         })
         .catch(err => {
