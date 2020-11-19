@@ -58,7 +58,7 @@ const PotluckCard = (props) => {
                     <p>{location}</p>
                     {props.potluckStatus === 'my-potlucks' ? 
                         <p>{items.map((item) => `${item.foodName}, `)}</p> : 
-                        <form>
+                        <form onSubmit={(e) => e.preventDefault()}>
                             {foodItems.map(item => 
                                 <span>
                                     <input type="checkbox" id={item.selectedBy} name={item.foodName} checked={item.selected} onChange={onChange}/>
