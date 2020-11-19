@@ -13,24 +13,32 @@ const initialForm = {
     time: "",
     location: "",
     PotLuckName: "",
-    food: []
+    food: [],
+    guestList: []
     };
 
     const [formValues, setFormValues] = useState(initialForm);
 
+    
+
     const formChange = (name, values) => {
-    // console.log(name, values);
-    if (name === "food") {
-        setFormValues({
-        ...formValues,
-        [name]: [...formValues.food, values]
-        });
-    } else {
-        setFormValues({
-        ...formValues,
-        [name]: values
-        });
-    }
+        // console.log(name, values);
+        if (name === "food") {
+            setFormValues({
+            ...formValues,
+            [name]: [...formValues.food, values]
+            });
+        } else if(name === "guestList"){
+            setFormValues({
+                ...formValues,
+                [name]: [...formValues.guestList, values]
+                });
+        } else {
+            setFormValues({
+            ...formValues,
+            [name]: values
+            });
+        }
     };
 
     const formSubmit = () => {
@@ -40,7 +48,8 @@ const initialForm = {
         time: formValues.time,
         location: formValues.location,
         PotLuckName: formValues.PotLuckName,
-        food: formValues.food
+        food: formValues.food,
+        guestList: formValues.guestList
     };
 
     console.log(newPotLuck);

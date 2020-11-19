@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {StyledForm} from '../pages/CreatePotLuckStyle'
 import FoodList from "./FoodList";
+import UserList from "./UserList"
 
 function CreateForm(props) {
     const { values, change, submit, formValues } = props;
@@ -14,7 +15,7 @@ function CreateForm(props) {
     const [foodItem, setfoodItem] = useState("");
     
     const foodChange = (e) => {
-        const { name, value } = e.target;
+        const { value } = e.target;
         // console.log(name, value);
         setfoodItem(value);
     };
@@ -27,14 +28,25 @@ function CreateForm(props) {
     };
     
     //  food proccess end
+    // User start
+
+    const [user, setUser] = useState("")
+
+    const userChange = (e) => {
+        const {value} = e.target
+        setUser(value)
+    }
+
+    const userSubmit = (e) => {
+        e.preventDefault();
+        change("guestList", user)
+        setUser("")
+    }
+
     
     const onSubmit = (e) => {
         e.preventDefault();
-    
-        // foodSubmit()
-    
         submit();
-    
         console.log("submit in createFrom");
     };
     
@@ -90,26 +102,28 @@ function CreateForm(props) {
                 </div>
         
                 <div className="foodItems">
-                <label>
-                    Food Items:
-                    <input
-                    type="text"
-                    name="food"
-                    onChange={foodChange}
-                    value={foodItem}
-                    />
-                    <button className="foodBtn" onClick={foodSubmit}>
-                    Enter food
-                    </button>
-                </label>
-                <FoodList food={values} formValues={formValues} />
+                    <label>
+                        Food Items:
+                        <input
+                        type="text"
+                        name="food"
+                        onChange={foodChange}
+                        value={foodItem}
+                        />
+                        <button className="foodBtn" onClick={foodSubmit}>
+                        Enter food
+                        </button>
+                    </label>
+                    <FoodList food={values} formValues={formValues} />
                 </div>
         
                 <div className="userInvited">
-                <label>
-                    Add User:
-                    <input type="text" />
-                </label>
+                    <label>
+                        Add User:
+                        <input type="text" name="guesList" onChange={userChange} value={user} />
+                        <button className="userBtn" onClick={userSubmit} >Add User</button>
+                    </label>
+                    <UserList userList={values} formValues={formValues}/>
                 </div>
             </div>
         
@@ -120,22 +134,3 @@ function CreateForm(props) {
 
 export default CreateForm
 
-
-
-  // const removeFood = (e) => {
-    //     console.log(e.target)
-    //     // console.log(e.target.tagName)
-    //     if(e.target.tagName === 'path'){
-    //         // e.target.parentNode.parentNode.innerText === foodItem
-    //         // values.food.splice()
-    //         console.log( values.food.splice(foodItem, 1), ' parrent')
-    //     }
-    // }
-    // const deleteFood = (e) => {
-    //     const getoId = e.target.parentNode.parentNode.innerText;
-    //     const removedFood = comida.filter((item) => item !== getoId)
-    //     console.log(food({
-    //         ...comida,
-    //         removedFood
-    //     }))
-    // }
