@@ -77,7 +77,7 @@
             </label>
             <label>
                 Location:
-                <input type="text" value={values.location} onChange={values.location} name="location" />
+                <input type="text" value={values.location} onChange={onChange} name="location" />
             </label>
 
             {/* Food Proccesser */}
