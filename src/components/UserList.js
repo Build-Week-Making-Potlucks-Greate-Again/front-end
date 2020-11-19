@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import * as FaIcons from "react-icons/fa";
 
-function UserList({userList, formValues}) {
+import { searchUsername, searchUserId } from '../utils/search'
+
+function UserList({userList, formValues, guestId, setGuestId}) {
     const [useItem, setUseItem] = useState("");
 
     const deleteUser = (e) => {
@@ -16,10 +18,20 @@ function UserList({userList, formValues}) {
             setUseItem(btnClick);
         }
 
+        console.log(svgClick)
+        searchUsername(svgClick)
+        .then(res => {
+            console.log(res)
+            setGuestId(...[guestId.filter(id => id !== res.id)])
+        })
+        .catch(err => {
+            console.log(`User Not Found, cannot remove from ID list`)
+        })
+
         formValues({
             ...userList,
             guestList:[
-                ...userList.guestList.filter((guest) => guest.toLowerCase() !== useItem.toLowerCase())
+                ...userList.guestList.filter((guest) => guest !== useItem)
             ]
         })
     }
