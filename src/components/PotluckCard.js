@@ -37,7 +37,8 @@ const CardContainer = styled.div`
 
         /* border: thin black solid; */
         h4 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
+            text-align: left;
         }
         p {
             font-size: 0.9rem;
@@ -58,10 +59,69 @@ const CardContainer = styled.div`
     }
 }
 
-    .card-content {
-        /* background: ${(pr) => pr.theme.primaryColor}; */
-        margin: 1rem 1rem;
-        text-align: left;
+    .details-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        .details {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            .info-container {
+                width: 70%;
+                text-align: left;
+                line-height: 1.7rem;
+
+            }
+            
+            .checkbox-container {
+                width: 100%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: space-evenly;
+                padding: 0.2rem 0;
+                
+                span {
+                    width: 50%;
+                    display: inline-block;
+                }
+            }
+
+            form {
+                display: flex;
+                flex-flow: column wrap;
+                width: 70%;
+                text-align: left;
+            }
+        }
+    }
+    .button-container {
+        width: 100%;
+        padding: 0.2rem 0;
+        display: flex;
+        justify-content: space-between;
+        
+        button {
+            border: none;
+            text-align: center;
+            color: #ffffff;
+            display: inline;
+            padding: 0.3rem 0.3rem;
+            background-color: ${pr => pr.theme.primaryColor};
+            font-size: 1rem;
+            box-shadow: 1px 1px 3px black;
+            
+        }
+        button:hover {
+            background-color: ${pr => pr.theme.secondaryColor};
+            box-shadow: 2px 2px 5px black;
+        }
     }
 `;
 
@@ -307,147 +367,155 @@ const PotluckCard = (props) => {
         </div>
       </div>
       {moreDetails && (
-        <div>
-          {props.potluckStatus === "my-potlucks" ? (
-            edit ? (
-              <>
-                <form onSubmit={saveEdit}>
-                  <label>
-                    PotLuckName:
-                    <input
-                      type="text"
-                      name="potluck_name"
-                      value={editValues.potluck_name}
-                      onChange={onChange}
-                    />
-                  </label>
-                  <label>
-                    Date:
-                    <input
-                      type="date"
-                      name="date"
-                      onChange={onChange}
-                      value={editValues.date}
-                    />
-                  </label>
-                  <label>
-                    Time:
-                    <input
-                      type="time"
-                      value={editValues.time}
-                      onChange={onChange}
-                      name="time"
-                    />
-                  </label>
-                  <label>
-                    Location:
-                    <input
-                      type="text"
-                      value={editValues.location}
-                      onChange={onChange}
-                      name="location"
-                    />
-                  </label>
-                  <label>
-                    Food Items:
-                    <input
-                      type="text"
-                      value={addFood.food_name}
-                      onChange={onChange}
-                      name="food_name"
-                    />
-                    <button onClick={addFoodItem}>Add Food</button>
-                  </label>
-                  <label>
-                    Guests:
-                    <input
-                      type="text"
-                      value={guestName.username}
-                      onChange={onChange}
-                      name="username"
-                    />
-                    <button onClick={addGuest}>Add Guest</button>
-                  </label>
-                  {/* render food itmes for editing  */}
-                  {foodItems.map((item) => {
-                    return (
-                      <li key={item.food_name}>
-                        <span>{item.food_name}</span>
-                        <button onClick={deleteFoodItem}>
-                          <FaIcons.FaTrash />
-                        </button>
-                      </li>
-                    );
-                  })}
-                  {/* render guest list for editing */}
-                  <div>
-                  {guestList.map((guest) => {
-                    return (
-                      <li key={guest.username}>
-                        <span>{guest.username}</span>
-                        <button onClick={deleteGuest}>
-                          <FaIcons.FaTrash />
-                        </button>
-                      </li>
-                    );
-                  })}
-                  </div>
+        <div className='details-container'>
+          <div className='details'>
+            {props.potluckStatus === "my-potlucks" ? (
+                edit ? (
+                <>
+                    <form onSubmit={saveEdit}>
+                    <label>
+                        PotLuckName:
+                        <input
+                        type="text"
+                        name="potluck_name"
+                        value={editValues.potluck_name}
+                        onChange={onChange}
+                        />
+                    </label>
+                    <label>
+                        Date:
+                        <input
+                        type="date"
+                        name="date"
+                        onChange={onChange}
+                        value={editValues.date}
+                        />
+                    </label>
+                    <label>
+                        Time:
+                        <input
+                        type="time"
+                        value={editValues.time}
+                        onChange={onChange}
+                        name="time"
+                        />
+                    </label>
+                    <label>
+                        Location:
+                        <input
+                        type="text"
+                        value={editValues.location}
+                        onChange={onChange}
+                        name="location"
+                        />
+                    </label>
+                    <label>
+                        Food Items:
+                        <input
+                        type="text"
+                        value={addFood.food_name}
+                        onChange={onChange}
+                        name="food_name"
+                        />
+                        <button onClick={addFoodItem}>Add Food</button>
+                    </label>
+                    <label>
+                        Guests:
+                        <input
+                        type="text"
+                        value={guestName.username}
+                        onChange={onChange}
+                        name="username"
+                        />
+                        <button onClick={addGuest}>Add Guest</button>
+                    </label>
+                    {/* render food itmes for editing  */}
+                    {foodItems.map((item) => {
+                        return (
+                        <li key={item.food_name}>
+                            <span>{item.food_name}</span>
+                            <button onClick={deleteFoodItem}>
+                            <FaIcons.FaTrash />
+                            </button>
+                        </li>
+                        );
+                    })}
+                    {/* render guest list for editing */}
+                    <div>
+                    {guestList.map((guest) => {
+                        return (
+                        <li key={guest.username}>
+                            <span>{guest.username}</span>
+                            <button onClick={deleteGuest}>
+                            <FaIcons.FaTrash />
+                            </button>
+                        </li>
+                        );
+                    })}
+                    </div>
 
-                  <div>
-                    <button>Submit</button>
-                    <button onClick={editPotluck}>Cancel</button>
-                  </div>
-                </form>
-              </>
+                    <div>
+                        <button>Submit</button>
+                        <button onClick={editPotluck}>Cancel</button>
+                    </div>
+                    </form>
+                </>
+                ) : (
+                <>
+                    <div className='info-container'>
+                      <p>Time: {time}</p>
+                      <p>Location: {location}</p>
+                    </div>
+                    <form onSubmit={onSubmit}>
+                      <div className='checkbox-container'>
+                        {foodItems.map((item) => (
+                            <span key={item.food_name}>
+                            <input
+                                type="checkbox"
+                                id={item.selectedBy}
+                                name={item.food_name}
+                                checked={item["selected?"]}
+                                onChange={onChange}
+                            />
+                            <label for={item.food_name}> {item.food_name.replace(/^\w/, (c) => c.toUpperCase())}</label>
+                            </span>
+                        ))}
+                      </div>
+                    <div className='button-container'>
+                        <button>Submit</button>
+                        <button onClick={editPotluck}>Edit</button>
+                        <button onClick={onDelete}>Delete</button>
+                    </div>
+                    </form>
+                    <div></div>
+                </>
+                )
             ) : (
-              <>
-                <p>Time: {time}</p>
-                <p>Location: {location}</p>
+                <>
+                <div className='info-container'>
+                  <p>Time: {time}</p>
+                  <p>Location: {location}</p>
+                </div>
                 <form onSubmit={onSubmit}>
-                  {foodItems.map((item) => (
+                    {foodItems.map((item) => (
                     <span key={item.food_name}>
-                      <input
+                        <input
                         type="checkbox"
                         id={item.selectedBy}
                         name={item.food_name}
                         checked={item["selected?"]}
                         onChange={onChange}
-                      />
-                      <label for={item.food_name}>{item.food_name}</label>
+                        />
+                        <label for={item.food_name}>{item.food_name}</label>
                     </span>
-                  ))}
-                  <div>
+                    ))}
+                    <div>
                     <button>Submit</button>
-                    <button onClick={editPotluck}>Edit</button>
-                    <button onClick={onDelete}>Delete</button>
-                  </div>
+                    </div>
                 </form>
-                <div></div>
-              </>
-            )
-          ) : (
-            <>
-              <p>Time: {time}</p>
-              <p>Location: {location}</p>
-              <form onSubmit={onSubmit}>
-                {foodItems.map((item) => (
-                  <span key={item.food_name}>
-                    <input
-                      type="checkbox"
-                      id={item.selectedBy}
-                      name={item.food_name}
-                      checked={item["selected?"]}
-                      onChange={onChange}
-                    />
-                    <label for={item.food_name}>{item.food_name}</label>
-                  </span>
-                ))}
-                <div>
-                  <button>Submit</button>
-                </div>
-              </form>
-            </>
-          )}
+                </>
+            )}
+          </div>
         </div>
       )}
     </CardContainer>
