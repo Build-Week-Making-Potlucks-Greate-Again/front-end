@@ -3,6 +3,8 @@ import styled from "styled-components";
 import * as FaIcons from "react-icons/fa";
 import {searchUsername} from '../utils/search'
 
+import axiosWithAuth from '../validation/AxiosAuthorization'
+
 const CardContainer = styled.div`
 
     background: ${pr => pr.theme.cardColor1};
@@ -169,9 +171,10 @@ const PotluckCard = (props) => {
     }
   };
 
+  // user actions
   const onSubmit = (e) => {
     e.preventDefault();
-    submitEdit(foodItems, id);
+    submitEdit(foodItems, id, props.potluckInfo);
   };
 
   const onDelete = (e) => {
@@ -187,10 +190,24 @@ const PotluckCard = (props) => {
     e.preventDefault();
     setEdit(!edit);
     console.log(editValues)
-    myPotlucks.forEach((potluck) => console.log(potluck.id));
+    // myPotlucks.forEach((potluck) => console.log(potluck.id));
     setMyPotlucks(
       myPotlucks.map((potluck) => (potluck.id === id ? editValues : potluck))
     );
+
+    const newPotluckObject = {...editValues, guestList:guestList, foodList:foodItems}
+
+    ///// endpoing to update potluck, code in lines 193-195 would go in here
+    // axiosWithAuth()
+    // .post(`https://mplga-tt-webft-49.herokuapp.com/api/potluck/${id}`, newPotluckObject)
+    // .then(res => {
+    //   console.log(res)
+    // })
+    // .catch(err => {
+    //   debugger
+    //   console.log(err)
+    // })
+
   };
 
   const addFoodItem = (e) => {

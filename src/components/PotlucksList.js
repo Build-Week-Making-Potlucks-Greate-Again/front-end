@@ -70,7 +70,19 @@ const PotlucksList = (props) => {
 
     },[])
 
-    const submitEdit = (arrayOfFoods, id) => {
+    const submitEdit = (arrayOfFoods, id, potluckInfo) => {
+
+        const pushedObject = {...potluckInfo, foodList:arrayOfFoods}
+
+        /// axios call would be made and the update to state would be inside instead
+        // axiosWithAuth()
+        // .post(`https://mplga-tt-webft-49.herokuapp.com/api/potluck/${id}`, pushedObject)
+        // .then(res => {
+
+        // })
+        // .catch(err => {
+
+        // })
 
         setguestPotlucks(guestPotlucks.map(potluck => {
             if (potluck.id === id){
@@ -84,6 +96,16 @@ const PotlucksList = (props) => {
     }
 
     const deletePotluck = (id) => {
+        
+        // axios call to delete specific item ID and update our state in site
+        // axiosWithAuth()
+        // .delete(`https://mplga-tt-webft-49.herokuapp.com/api/potluck/${id}`)
+        // .then(res => {
+
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
         setMyPotlucks(myPotlucks.filter(potluck => potluck.id !== id))
     }
 
