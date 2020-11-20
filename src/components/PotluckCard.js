@@ -190,6 +190,8 @@ const PotluckCard = (props) => {
           console.log(err)
       })
 
+      setEditValues({...editValues, guestList:[...editValues.guestList, guestName]})
+
       setMyPotlucks(myPotlucks.map(potluck => {
         if (potluck.id === id) {
             return {...potluck, guestList:[...potluck.guestList, guestName]}
