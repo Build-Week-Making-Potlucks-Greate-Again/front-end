@@ -23,7 +23,11 @@ span {
     align-items: center;
     /* border: 1px solid green; */
     text-decoration: none;
-    color: black;
+    color: ${pr => pr.theme.defaultTextColor};
+
+    &:hover {
+        color: ${pr => pr.theme.tertiaryColor}
+    }
 }
 `
 

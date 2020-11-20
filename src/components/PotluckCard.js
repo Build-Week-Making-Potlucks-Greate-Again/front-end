@@ -31,9 +31,6 @@ const CardContainer = styled.div`
         /* background: ${pr => pr.theme.primaryColor}; */
         margin: 1rem 1rem;
         text-align: left;
-
-
-        border: thin black solid;
     }
 `
 const getDate = (date) => { // var data is passed as a str mm-dd-yyyy
