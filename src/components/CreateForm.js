@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {StyledForm} from '../pages/CreatePotLuckStyle'
 import FoodList from "./FoodList";
 import UserList from "./UserList"
-
+ 
 import { searchUsername, searchUserId } from '../utils/search'
 
 function CreateForm(props) {
@@ -30,12 +30,17 @@ function CreateForm(props) {
     };
     
     //  food proccess end
-    // User start
 
+
+    // User start
+    
     const [user, setUser] = useState("")
 
     const userChange = (e) => {
         const {value} = e.target
+        
+        
+
         setUser(value)
     }
 
@@ -44,16 +49,13 @@ function CreateForm(props) {
         // search here
         searchUsername(user)
         .then(res => {
+            console.log(res)
             res.id && setGuestId([...guestId, res.id])
         })
-
-
-
         change("guestList", user)
         setUser("")
     }
 
-    
     const onSubmit = (e) => {
         e.preventDefault();
         submit();
@@ -64,15 +66,6 @@ function CreateForm(props) {
         <StyledForm>
             <div className="container">
                 <div className="mainInfo">
-                {/* <label>
-                    Name:
-                    <input
-                    type="text"
-                    name="name"
-                    value={values.name}
-                    onChange={onChange}
-                    />
-                </label> */}
                 <label>
                     PotLuckName:
                     <input
@@ -129,8 +122,8 @@ function CreateForm(props) {
         
                 <div className="userInvited">
                     <label>
-                        Add User:
-                        <input type="text" name="guesList" onChange={userChange} value={user} />
+                        <span>Add User:</span>
+                        <input type="text" name="guestList" onChange={userChange} value={user} />
                         <button className="userBtn" onClick={userSubmit} >Add User</button>
                     </label>
                     <UserList guestId={guestId} setGuestId={setGuestId} userList={values} formValues={formValues}/>
@@ -144,3 +137,33 @@ function CreateForm(props) {
 
 export default CreateForm
 
+// const initialUser = {
+//     id: Math.random() * 100000,
+//     name: ''
+// }
+// const [user, setUser] = useState(initialUser)
+
+// const userChange = (e) => {
+//     const {value} = e.target
+    
+//     setUser({
+//         id: Math.random() * 100000,
+//         ['name']: value
+//     })
+
+// }
+
+
+// const userSubmit = (e) => {
+//     e.preventDefault();
+//     let nam = user.name;
+//     console.log(typeof nam)
+//     // search here
+//     searchUsername(nam)
+//     .then(res => {
+//         console.log(res)
+//         res.id && setGuestId([...guestId, res.id])
+//     })
+//     change("guestList", user)
+//     setUser("")
+// }

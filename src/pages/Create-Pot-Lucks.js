@@ -9,7 +9,7 @@ import CreateForm from '../components/CreateForm'
 function CreatePotLucks() {
 
     const initialForm = {
-    name: "",
+    name: getData(),
     date: "",
     time: "",
     location: "",
@@ -19,7 +19,7 @@ function CreatePotLucks() {
     };
 
     const [formValues, setFormValues] = useState(initialForm);
-    const [potData , setPotData] = useState([])
+
     const [ guestId, setGuestId ] = useState([])
 
     const formChange = (name, values) => {
@@ -30,6 +30,7 @@ function CreatePotLucks() {
             [name]: [...formValues.food, values]
             });
         } else if(name === "guestList"){
+            console.log(name,'<-name', values, '<-value')
             setFormValues({
                 ...formValues,
                 [name]: [...formValues.guestList, values]
@@ -57,15 +58,13 @@ function CreatePotLucks() {
         console.log(newPotLuck);
 
         // Network Connection 
-        axios.post('https://jsonbox.io/box_079975f97939d478f372', newPotLuck)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
 
         axiosWithAuth().post(`https://mplga-tt-webft-49.herokuapp.com/api/potluck`, newPotLuck)
         .then(res => console.log(res.data))
         .catch(err => {
-            debugger
+            // debugger
             console.log(`Unable to Post Potluck`)
+            console.log(err)
         })
 
         
@@ -73,11 +72,12 @@ function CreatePotLucks() {
         setFormValues(initialForm);
     };
 
-    useEffect(() => {
-        // axios.get('https://jsonbox.io/box_079975f97939d478f372')
-        //     .then(res => setPotData(res.data))
-        //     .catch(err => console.log(err))
+    function getData(){
+        return window.localStorage.getItem('username')
+    }
 
+
+    useEffect(() => {
         searchUsername(localStorage.getItem('username'))
         .then(res => {
             setFormValues({...formValues, name:res.id})
@@ -98,30 +98,6 @@ function CreatePotLucks() {
         guestId={guestId}
         setGuestId={setGuestId}
         />
-        {/* <div className="test">
-                        <h1>Test Data here babie</h1>
-            {
-                potData.map(data => {
-                    return(
-                        <div>
-                            <h4>PotLuckName: {data.PotLuckName}</h4>
-                            <h5>Food list</h5>
-                            {
-                                data.food.map(food => {
-                                    return <p>{food}</p>
-                                })
-                            }
-                            <h6>People: {data.guestList.length} </h6>
-                            {
-                                data.guestList.map( pe => {
-                                    return <p>{pe}</p>
-                                })
-                            }
-                        </div>
-                    )
-                })
-            }
-        </div> */}
     </FormContainer>
     );
     }
