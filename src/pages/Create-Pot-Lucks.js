@@ -17,7 +17,7 @@ function CreatePotLucks() {
     food: [],
     guestList: []
     };
-
+ 
     const [formValues, setFormValues] = useState(initialForm);
 
     const [ guestId, setGuestId ] = useState([])
@@ -89,7 +89,7 @@ function CreatePotLucks() {
 
     return (
     <FormContainer>
-        <h2>Getto Forum</h2>
+        <h2>Potluck Form</h2>
         <CreateForm
         values={formValues}
         change={formChange}
