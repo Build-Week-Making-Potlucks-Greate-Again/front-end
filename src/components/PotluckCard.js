@@ -154,6 +154,7 @@ const PotluckCard = (props) => {
   const saveEdit = (e) => {
     e.preventDefault();
     setEdit(!edit);
+    console.log(editValues)
     myPotlucks.forEach((potluck) => console.log(potluck.id));
     setMyPotlucks(
       myPotlucks.map((potluck) => (potluck.id === id ? editValues : potluck))
@@ -189,6 +190,8 @@ const PotluckCard = (props) => {
           console.log(err)
       })
 
+      setEditValues({...editValues, guestList:[...editValues.guestList, guestName]})
+
       setMyPotlucks(myPotlucks.map(potluck => {
         if (potluck.id === id) {
             return {...potluck, guestList:[...potluck.guestList, guestName]}
@@ -205,6 +208,10 @@ const PotluckCard = (props) => {
 
     const guest_name = e.target.parentNode.parentNode.parentNode.innerText;
     console.log(guest_name);
+
+    setEditValues({...editValues, guestList:(editValues.guestList.filter(guest => guest.username !== guest_name))})
+
+
     setMyPotlucks(myPotlucks.map(potluck => {
         if (potluck.id === id) {
             return (
