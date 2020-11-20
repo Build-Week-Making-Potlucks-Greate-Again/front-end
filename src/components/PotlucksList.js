@@ -9,22 +9,38 @@ import PotluckCard from './PotluckCard'
 const MainContainer = styled.div`
     /* border: 1px solid red; */
     display: flex;
-    flex-flow: column wrap;
-    align-items: center;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    /* background: ${pr => pr.theme.primaryColor}; */
+    color: #ffffff;
 
     .separating-line {
         width:  90vw;
         margin: 2.5rem auto;
-        border-bottom: 2px solid ${pr => pr.theme.primaryColor};
+        border-bottom: 2px solid ${pr => pr.theme.secondaryColor};
     }
 
     .container {
+        width: 50%;
         display: flex;
-        flex-flow: row wrap;
-        align-items: flex-start;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        /* padding: 1rem 0; */
+    }
+
+    .my-potlucks {
+        width: 100%;
+    }
+    .guest-potlucks {
+        width: 100%;
+    }
+    h3 {
+        color: black;
+        padding: 1rem 1rem;
     }
 `
-
 
 const PotlucksList = (props) => {
     const [ myPotlucks, setMyPotlucks] = useState([])
@@ -81,9 +97,10 @@ const PotlucksList = (props) => {
 
     return (
         <MainContainer className="potlucks-container">
-            <h3>My Potlucks</h3>
-            <div className="my-potlucks container">
-                {myPotlucks && (
+            <div className='container'>
+                <h3>My Potlucks</h3>
+                <div className="my-potlucks">
+                    {myPotlucks && (
                     myPotlucks.map(potluck => 
                     <PotluckCard 
                     key={potluck.id+potluck.date} 
@@ -91,11 +108,13 @@ const PotlucksList = (props) => {
                     deletePotluck={deletePotluck}
                     potluckStatus='my-potlucks'/>)
                 )}
+                </div>
             </div>
-            {guestPotlucks && <span className='separating-line'/>}
-            <h3>My Friend's Potlucks</h3>
-            <div className="guest-potlucks container">
-                {guestPotlucks && (
+            {/* {guestPotlucks && <span className='separating-line'/>} */}
+            <div className='container'>
+                <h3>My Friend's Potlucks</h3>
+                <div className="guest-potlucks">
+                    {guestPotlucks && (
                     guestPotlucks
                     .map(potluck => 
                     <PotluckCard 
@@ -105,6 +124,7 @@ const PotlucksList = (props) => {
                     setguestPotlucks={setguestPotlucks} 
                     potluckStatus='guest-potlucks'/>)
                 )}
+                </div>
             </div>
         </MainContainer>
     )

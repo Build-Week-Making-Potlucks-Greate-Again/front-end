@@ -1,72 +1,145 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
-const StyledDiv = styled.div`
-  border: 7px solid ${(pr) => pr.theme.primaryColor};
-  min-width: 25rem;
-  max-width: 50rem;
-  margin: 1rem 2rem;
-`;
+const CardContainer = styled.div`
+    background: ${pr => pr.theme.secondaryColor};
+    /* min-width: 25rem;
+    max-width: 50rem; */
+    width: 100%;
+    padding: 1rem 0;
+    /* margin: 0.5rem 2rem; */
+    cursor: pointer;
+
+    &:hover {
+        background: ${pr => pr.theme.tertiaryColor};
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0% 10%;
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+    }
+
+    .card-content {
+        /* background: ${pr => pr.theme.primaryColor}; */
+        margin: 1rem 1rem;
+        text-align: left;
+
+
+        border: thin black solid;
+    }
+`
+const getDate = (date) => { // var data is passed as a str mm-dd-yyyy
+    let dateArr = date.split('-');
+    let day = dateArr[1].split('');
+    let ending;
+
+    if (day.length > 1)
+        day = parseInt(day[day.length - 1]);
+    else
+        day = parseInt(dateArr[1]);
+
+    if (day < 4) {
+        ending = (day === 1 ? 'st' : 
+                        day === 2 ? 'nd' :
+                        'rd');
+    } else {
+        ending = 'th';
+    }
+     
+    if (dateArr[0] === '1') {
+        dateArr[0] = 'January';
+    } else if (dateArr[0] === '2') {
+        dateArr[0] = 'February';
+    } else if (dateArr[0] === '3') {
+        dateArr[0] = 'March';
+    } else if (dateArr[0] === '4') {
+        dateArr[0] = 'April';
+    } else if (dateArr[0] === '5') {
+        dateArr[0] = 'May';
+    } else if (dateArr[0] === '6') {
+        dateArr[0] = 'June';
+    } else if (dateArr[0] === '7') {
+        dateArr[0] = 'July';
+    } else if (dateArr[0] === '8') {
+        dateArr[0] = 'August';
+    } else if (dateArr[0] === '9') {
+        dateArr[0] = 'September';
+    } else if (dateArr[0] === '10') {
+        dateArr[0] = 'October';
+    } else if (dateArr[0] === '11') {
+        dateArr[0] = 'November';
+    } else if (dateArr[0] === '12') {
+        dateArr[0] = 'December';
+    } else {
+        dateArr[0] = null;
+    }
+    return `${dateArr[0]} ${dateArr[1]}${ending} of ${dateArr[2]}`;
+}
 
 const PotluckCard = (props) => {
-  const {
-    potluck_name,
-    foodList,
-    guestList,
-    date,
-    time,
-    location,
-    id,
-    organizer,
-  } = props.potluckInfo;
-  const { submitEdit, deletePotluck } = props;
-  const [moreDetails, setMoreDetails] = useState(false);
-  const [ editValues, setEditValues ] = useState(props.potluckInfo)
-  const [edit, setEdit] = useState(false);
-  const [foodItems, setFoodItems] = useState(foodList);
-
-  const onChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    debugger
-    if (type = 'checkbox') {
-        setFoodItems([
-            ...foodItems.map((item) => {
-              if (item.food_name === name) {
-                return {
-                  ...item,
-                  ["selected?"]: item["selected?"] ? 0 : 1,
-                  selected_by:
-                    item.selected_by === null
-                      ? localStorage.getItem("username")
-                      : null,
-                };
-              }
-              return item;
-            }),
-          ]);
-    }
+    const {
+      potluck_name,
+      foodList,
+      guestList,
+      date,
+      time,
+      location,
+      id,
+      organizer,
+    } = props.potluckInfo;
+    const { submitEdit, deletePotluck } = props;
+    const [moreDetails, setMoreDetails] = useState(false);
+    const [ editValues, setEditValues ] = useState(props.potluckInfo)
+    const [edit, setEdit] = useState(false);
+    const [foodItems, setFoodItems] = useState(foodList);
+  
+    const onChange = (e) => {
+      const { name, value, type, checked } = e.target;
+      debugger
+      if (type = 'checkbox') {
+          setFoodItems([
+              ...foodItems.map((item) => {
+                if (item.food_name === name) {
+                  return {
+                    ...item,
+                    ["selected?"]: item["selected?"] ? 0 : 1,
+                    selected_by:
+                      item.selected_by === null
+                        ? localStorage.getItem("username")
+                        : null,
+                  };
+                }
+                return item;
+              }),
+            ]);
+      }
     else {
         setEditValues({...editValues, [name]:value})
-    }
+    }    
+};
 
-  };
+const onSubmit = (e) => {
+  e.preventDefault();
+  submitEdit(foodItems, id);
+};
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    submitEdit(foodItems, id);
-  };
+const onDelete = (e) => {
+  e.preventDefault();
+  deletePotluck(id);
+};
 
-  const onDelete = (e) => {
-    e.preventDefault();
-    deletePotluck(id);
-  };
-
-  const editPotluck = (e) => {
-    e.preventDefault();
-    setEdit(!edit);
-  };
-
-  const saveEdit = (e) => {
+const editPotluck = (e) => {
+  e.preventDefault();
+  setEdit(!edit);
+};    
+const saveEdit = (e) => {
     e.preventDefault();
     setEdit(!edit);
   };
@@ -95,7 +168,7 @@ const PotluckCard = (props) => {
     // should use guests id to get the name of the users and save to state
   }, []);
   return (
-    <StyledDiv className="potluck-card" onClick={clickHandle}>
+    <CardContainer className="potluck-card" onClick={clickHandle}>
       <h4>{`${potluck_name}`}</h4>
       <h6>{`Organizer: ${organizer}`}</h6>
       <p>{date}</p>
@@ -202,8 +275,8 @@ const PotluckCard = (props) => {
           )}
         </div>
       )}
-    </StyledDiv>
+    </CardContainer>
   );
 };
 
-export default PotluckCard;
+export default PotluckCard
