@@ -44,18 +44,6 @@ function CreatePotLucks() {
 
     const formSubmit = () => {
 
-
-        // object that post takes
-        // const postPotluck = {
-        //     potluck_name: 'this potluck',
-        //     date: '12.01.22',
-        //     time: '3:20',
-        //     location: 'someplace',
-        //     potluck_organizer: 6,
-        //     guest_list: [2],
-        //     food_items: ['food1', 'food2', 'food3']
-        // }
-
         const newPotLuck = {
             potluck_name: formValues.PotLuckName,
             date: formValues.date,
@@ -65,16 +53,6 @@ function CreatePotLucks() {
             guest_list: guestId,
             food_items: formValues.food
         }
-
-        // const newPotLuck = {
-        //     potluck_name: formValues.PotLuckName,
-        //     date: processDate(formValues.date),
-        //     potluck_organizer: formValues.name,
-        //     time: formValues.time,
-        //     location: formValues.location,
-        //     food_item: formValues.food,
-        //     guest_list: guestId
-        // };
 
         console.log(newPotLuck);
 
@@ -96,9 +74,9 @@ function CreatePotLucks() {
     };
 
     useEffect(() => {
-        axios.get('https://jsonbox.io/box_079975f97939d478f372')
-            .then(res => setPotData(res.data))
-            .catch(err => console.log(err))
+        // axios.get('https://jsonbox.io/box_079975f97939d478f372')
+        //     .then(res => setPotData(res.data))
+        //     .catch(err => console.log(err))
 
         searchUsername(localStorage.getItem('username'))
         .then(res => {
