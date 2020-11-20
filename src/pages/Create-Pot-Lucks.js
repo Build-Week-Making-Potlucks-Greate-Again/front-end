@@ -9,7 +9,7 @@ import CreateForm from '../components/CreateForm'
 function CreatePotLucks() {
 
     const initialForm = {
-    name: "",
+    name: getData(),
     date: "",
     time: "",
     location: "",
@@ -71,7 +71,15 @@ function CreatePotLucks() {
         setFormValues(initialForm);
     };
 
+    function getData(){
+        return window.localStorage.getItem('username')
+    }
+
+    console.log(initialForm.name)
+
     useEffect(() => {
+
+        
 
         searchUsername(localStorage.getItem('username'))
         .then(res => {
