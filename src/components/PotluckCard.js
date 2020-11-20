@@ -102,8 +102,8 @@ const PotluckCard = (props) => {
   
     const onChange = (e) => {
       const { name, value, type, checked } = e.target;
-      debugger
-      if (type = 'checkbox') {
+      console.log(type)
+      if (type === 'checkbox') {
           setFoodItems([
               ...foodItems.map((item) => {
                 if (item.food_name === name) {
