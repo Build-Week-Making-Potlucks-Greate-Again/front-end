@@ -4,15 +4,16 @@ import * as FaIcons from "react-icons/fa";
 import {searchUsername} from '../utils/search'
 
 const CardContainer = styled.div`
-  background: ${(pr) => pr.theme.secondaryColor};
-  /* min-width: 25rem;
-    max-width: 50rem; */
-  width: 100%;
-  padding: 1rem 0;
-  /* margin: 0.5rem 2rem; */
-  cursor: pointer;
 
-  &:hover {
+    background: ${pr => pr.theme.cardColor1};
+    background: ${pr => pr.theme.cardGradientColor1};
+    width: 100%;
+    padding: 1rem 0;
+    /* margin: 0.5rem 2rem; */
+    cursor: pointer;
+    
+    &:hover {
+        
     background: ${(pr) => pr.theme.tertiaryColor};
   }
 

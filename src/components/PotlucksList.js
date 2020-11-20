@@ -14,12 +14,6 @@ const MainContainer = styled.div`
     align-items: flex-start;
     color: ${pr => pr.theme.defaultTextColor};
 
-    .separating-line {
-        width:  90vw;
-        margin: 2.5rem auto;
-        border-bottom: 2px solid ${pr => pr.theme.secondaryColor};
-    }
-
     .container {
         width: 50%;
         display: flex;
@@ -30,10 +24,10 @@ const MainContainer = styled.div`
     }
 
     .my-potlucks {
-        width: 100%;
+        width: 95%;
     }
     .guest-potlucks {
-        width: 100%;
+        width: 95%;
     }
     h3 {
         padding: 1rem 1rem;
@@ -111,7 +105,6 @@ const PotlucksList = (props) => {
                 )}
                 </div>
             </div>
-            {/* {guestPotlucks && <span className='separating-line'/>} */}
             <div className='container'>
                 <h3>My Friend's Potlucks</h3>
                 <div className="guest-potlucks">
