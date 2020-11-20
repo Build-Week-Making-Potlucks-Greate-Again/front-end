@@ -74,9 +74,9 @@ function CreatePotLucks() {
     };
 
     useEffect(() => {
-        axios.get('https://jsonbox.io/box_079975f97939d478f372')
-            .then(res => setPotData(res.data))
-            .catch(err => console.log(err))
+        // axios.get('https://jsonbox.io/box_079975f97939d478f372')
+        //     .then(res => setPotData(res.data))
+        //     .catch(err => console.log(err))
 
         searchUsername(localStorage.getItem('username'))
         .then(res => {
