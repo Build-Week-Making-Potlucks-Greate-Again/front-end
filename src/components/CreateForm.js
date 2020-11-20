@@ -30,8 +30,10 @@ function CreateForm(props) {
     };
     
     //  food proccess end
-    // User start
 
+
+    // User start
+    
     const [user, setUser] = useState("")
 
     const userChange = (e) => {
@@ -50,14 +52,10 @@ function CreateForm(props) {
             console.log(res)
             res.id && setGuestId([...guestId, res.id])
         })
-
-
-
         change("guestList", user)
         setUser("")
     }
 
-    
     const onSubmit = (e) => {
         e.preventDefault();
         submit();
@@ -125,7 +123,7 @@ function CreateForm(props) {
                 <div className="userInvited">
                     <label>
                         <span>Add User:</span>
-                        <input type="text" name="guesList" onChange={userChange} value={user} />
+                        <input type="text" name="guestList" onChange={userChange} value={user} />
                         <button className="userBtn" onClick={userSubmit} >Add User</button>
                     </label>
                     <UserList guestId={guestId} setGuestId={setGuestId} userList={values} formValues={formValues}/>
@@ -139,3 +137,33 @@ function CreateForm(props) {
 
 export default CreateForm
 
+// const initialUser = {
+//     id: Math.random() * 100000,
+//     name: ''
+// }
+// const [user, setUser] = useState(initialUser)
+
+// const userChange = (e) => {
+//     const {value} = e.target
+    
+//     setUser({
+//         id: Math.random() * 100000,
+//         ['name']: value
+//     })
+
+// }
+
+
+// const userSubmit = (e) => {
+//     e.preventDefault();
+//     let nam = user.name;
+//     console.log(typeof nam)
+//     // search here
+//     searchUsername(nam)
+//     .then(res => {
+//         console.log(res)
+//         res.id && setGuestId([...guestId, res.id])
+//     })
+//     change("guestList", user)
+//     setUser("")
+// }

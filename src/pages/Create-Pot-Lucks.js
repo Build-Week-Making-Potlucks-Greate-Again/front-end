@@ -30,6 +30,7 @@ function CreatePotLucks() {
             [name]: [...formValues.food, values]
             });
         } else if(name === "guestList"){
+            console.log(name,'<-name', values, '<-value')
             setFormValues({
                 ...formValues,
                 [name]: [...formValues.guestList, values]
@@ -75,12 +76,8 @@ function CreatePotLucks() {
         return window.localStorage.getItem('username')
     }
 
-    console.log(initialForm.name)
 
     useEffect(() => {
-
-        
-
         searchUsername(localStorage.getItem('username'))
         .then(res => {
             setFormValues({...formValues, name:res.id})
