@@ -169,7 +169,7 @@ export const StyledForm = styled.form`
 
                 span{
                     font-size: 1.5rem;
-                    text-transform: capitalize;
+                    
                 }
                 button{
                     padding: 5px;

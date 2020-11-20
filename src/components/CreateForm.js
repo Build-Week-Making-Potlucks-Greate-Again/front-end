@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {StyledForm} from '../pages/CreatePotLuckStyle'
 import FoodList from "./FoodList";
 import UserList from "./UserList"
-
+ 
 import { searchUsername, searchUserId } from '../utils/search'
 
 function CreateForm(props) {
@@ -36,6 +36,9 @@ function CreateForm(props) {
 
     const userChange = (e) => {
         const {value} = e.target
+        
+        
+
         setUser(value)
     }
 
@@ -44,6 +47,7 @@ function CreateForm(props) {
         // search here
         searchUsername(user)
         .then(res => {
+            console.log(res)
             res.id && setGuestId([...guestId, res.id])
         })
 
@@ -64,15 +68,6 @@ function CreateForm(props) {
         <StyledForm>
             <div className="container">
                 <div className="mainInfo">
-                {/* <label>
-                    Name:
-                    <input
-                    type="text"
-                    name="name"
-                    value={values.name}
-                    onChange={onChange}
-                    />
-                </label> */}
                 <label>
                     PotLuckName:
                     <input

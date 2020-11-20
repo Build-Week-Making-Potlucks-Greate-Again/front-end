@@ -19,7 +19,7 @@ function CreatePotLucks() {
     };
 
     const [formValues, setFormValues] = useState(initialForm);
-    const [potData , setPotData] = useState([])
+
     const [ guestId, setGuestId ] = useState([])
 
     const formChange = (name, values) => {
@@ -57,9 +57,6 @@ function CreatePotLucks() {
         console.log(newPotLuck);
 
         // Network Connection 
-        axios.post('https://jsonbox.io/box_079975f97939d478f372', newPotLuck)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
 
         axiosWithAuth().post(`https://mplga-tt-webft-49.herokuapp.com/api/potluck`, newPotLuck)
         .then(res => console.log(res.data))
@@ -75,9 +72,6 @@ function CreatePotLucks() {
     };
 
     useEffect(() => {
-        // axios.get('https://jsonbox.io/box_079975f97939d478f372')
-        //     .then(res => setPotData(res.data))
-        //     .catch(err => console.log(err))
 
         searchUsername(localStorage.getItem('username'))
         .then(res => {
@@ -99,30 +93,6 @@ function CreatePotLucks() {
         guestId={guestId}
         setGuestId={setGuestId}
         />
-        {/* <div className="test">
-                        <h1>Test Data here babie</h1>
-            {
-                potData.map(data => {
-                    return(
-                        <div>
-                            <h4>PotLuckName: {data.PotLuckName}</h4>
-                            <h5>Food list</h5>
-                            {
-                                data.food.map(food => {
-                                    return <p>{food}</p>
-                                })
-                            }
-                            <h6>People: {data.guestList.length} </h6>
-                            {
-                                data.guestList.map( pe => {
-                                    return <p>{pe}</p>
-                                })
-                            }
-                        </div>
-                    )
-                })
-            }
-        </div> */}
     </FormContainer>
     );
     }

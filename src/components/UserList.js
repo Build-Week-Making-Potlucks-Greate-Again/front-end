@@ -18,9 +18,9 @@ function UserList({userList, formValues, guestId, setGuestId}) {
             setUseItem(btnClick);
         }
 
-        console.log(svgClick)
+        console.log(e.target.parentNode.parentNode.parentNode.innerText)
         
-        searchUsername(svgClick)
+        searchUsername(useItem)
         .then(res => {
             console.log(res)
             setGuestId(...[guestId.filter(id => id !== res.id)])
@@ -55,3 +55,4 @@ function UserList({userList, formValues, guestId, setGuestId}) {
 }
 
 export default UserList
+// (...[guestId.filter(id => id !== res.id)])
