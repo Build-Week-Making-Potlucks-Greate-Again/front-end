@@ -105,6 +105,9 @@ const PotlucksList = (props) => {
                     <PotluckCard 
                     key={potluck.id+potluck.date} 
                     potluckInfo={potluck} 
+                    myPotlucks={myPotlucks}
+                    submitEdit={submitEdit}
+                    setMyPotlucks={setMyPotlucks}
                     deletePotluck={deletePotluck}
                     potluckStatus='my-potlucks'/>)
                 )}

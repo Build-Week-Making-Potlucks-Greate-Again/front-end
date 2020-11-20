@@ -101,7 +101,7 @@ const PotluckCard = (props) => {
       id,
       organizer,
     } = props.potluckInfo;
-    const { submitEdit, deletePotluck } = props;
+    const { submitEdit, deletePotluck, setMyPotlucks, myPotlucks } = props;
     const [moreDetails, setMoreDetails] = useState(false);
     const [ editValues, setEditValues ] = useState(props.potluckInfo)
     const [edit, setEdit] = useState(false);
@@ -153,6 +153,8 @@ const editPotluck = (e) => {
 const saveEdit = (e) => {
     e.preventDefault();
     setEdit(!edit);
+    myPotlucks.forEach(potluck => console.log(potluck.id))
+    setMyPotlucks(myPotlucks.map(potluck => potluck.id === id ? editValues : potluck))
   };
 
 const addFoodItem = (e) => {
@@ -207,7 +209,7 @@ const deleteFoodItem = (e) => {
           {props.potluckStatus === "my-potlucks" ? (
             edit ? (
               <>
-              <form>
+              <form onSubmit={saveEdit}>
               <label>
                     PotLuckName:
                     <input
@@ -287,7 +289,7 @@ const deleteFoodItem = (e) => {
                     </span>
                   ))}
                   <div>
-                    <button>Submit</button>
+                    <button >Submit</button>
                     <button onClick={editPotluck}>Edit</button>
                     <button onClick={onDelete}>Delete</button>
                   </div>
