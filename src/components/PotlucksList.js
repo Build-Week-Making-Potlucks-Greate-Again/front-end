@@ -12,8 +12,7 @@ const MainContainer = styled.div`
     flex-flow: row wrap;
     justify-content: space-evenly;
     align-items: flex-start;
-    /* background: ${pr => pr.theme.primaryColor}; */
-    color: #ffffff;
+    color: ${pr => pr.theme.defaultTextColor};
 
     .separating-line {
         width:  90vw;
@@ -37,7 +36,6 @@ const MainContainer = styled.div`
         width: 100%;
     }
     h3 {
-        color: black;
         padding: 1rem 1rem;
     }
 `
