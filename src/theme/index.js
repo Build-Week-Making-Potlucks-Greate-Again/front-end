@@ -12,4 +12,5 @@ export default {
     cardGradientColor1: 'linear-gradient(180deg, rgba(208,122,113,1) 10%, rgba(194,109,100,1) 50%, rgba(208,122,113,1) 93%)',
     cardSpacing: '2rem', //margin-bottom
     cardPadding: '1rem 0',
+    cardDropShadow: '3px 3px 5px black'
 }

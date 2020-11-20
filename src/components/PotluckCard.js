@@ -10,6 +10,7 @@ const CardContainer = styled.div`
     width: 100%;
     padding: ${pr => pr.theme.cardPadding};
     margin-bottom: ${pr => pr.theme.cardSpacing};
+    box-shadow: ${pr => pr.theme.cardDropShadow};
     cursor: pointer;
     
     &:hover {
@@ -46,6 +47,12 @@ const CardContainer = styled.div`
         display: flex;
         flex-flow: row wrap;
         align-content: center;
+        justify-content: space-between;
+        font-size: 1.3rem;
+
+        .guest-list-container {
+            max-width: 50%;
+        }
     }
 }
 
@@ -55,6 +62,11 @@ const CardContainer = styled.div`
         text-align: left;
     }
 `;
+
+window.addEventListener("mouseenter", e => {
+    console.log(e.target);
+});
+
 const getDate = (date) => {
   // var data is passed as a str mm-dd-yyyy
   let dateArr = date.split("-");
@@ -122,8 +134,9 @@ const PotluckCard = (props) => {
   } = props.potluckInfo;
   const { submitEdit, deletePotluck, setMyPotlucks, myPotlucks } = props;
   const [moreDetails, setMoreDetails] = useState(false);
-  const [editValues, setEditValues] = useState(props.potluckInfo);
   const [edit, setEdit] = useState(false);
+  const [showGuests, setShowGuests] = useState(false);
+  const [editValues, setEditValues] = useState(props.potluckInfo);
   const [foodItems, setFoodItems] = useState(foodList);
   const [addFood, setAddFood] = useState(initialFoodObject);
   const [guestName, setGuestName] = useState(initialGuestObject)
@@ -262,9 +275,11 @@ const PotluckCard = (props) => {
         </div>
         <div className='attendees'>
           <h6>{`Organizer: ${organizer}`}</h6>
-          <h6>{`Guests: ${guestList
-                .map((guest) => guest.username)
-                .join(", ")}`}</h6>
+          <div className='guest-list-container' onMouseEnter={() => setShowGuests(true)} onMouseLeave={() => setShowGuests(false)}>
+            <h6>{`Guests: ${showGuests ? guestList
+                    .map((guest) => guest.username)
+                    .join(', ') : ''}`}</h6>
+          </div>
         </div>
       </div>
       {moreDetails && (
