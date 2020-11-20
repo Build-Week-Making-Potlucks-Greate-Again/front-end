@@ -3,8 +3,11 @@ import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
 
 const StyledHeader = styled.header`
-margin: 1rem auto 3rem auto;
+margin: 1rem auto 1.8rem auto;
 
+h1 {
+    font-size: 3.5rem;
+}
 span {
     border: 1px solid grey;
     height: 2rem;
@@ -38,7 +41,7 @@ const Header = (props) => {
 
     return (
         <StyledHeader>
-            <h1>My Potluck Planner</h1>
+            <h1>Potluck Planner</h1>
             {location.pathname !== '/' 
             ? (
                 <nav className='app-nav'>
