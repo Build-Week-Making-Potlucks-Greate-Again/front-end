@@ -171,6 +171,7 @@ const saveEdit = (e) => {
     <CardContainer className="potluck-card" onClick={clickHandle}>
       <h4>{`${potluck_name}`}</h4>
       <h6>{`Organizer: ${organizer}`}</h6>
+      <h6>{`Guests: ${guestList.map(guest => guest.username).join(', ')}`}</h6>
       <p>{date}</p>
       {moreDetails && (
         <div>
