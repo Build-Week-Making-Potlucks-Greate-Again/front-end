@@ -8,77 +8,96 @@ const CardContainer = styled.div`
     background: ${pr => pr.theme.cardColor1};
     background: ${pr => pr.theme.cardGradientColor1};
     width: 100%;
-    padding: 1rem 0;
-    /* margin: 0.5rem 2rem; */
+    padding: ${pr => pr.theme.cardPadding};
+    margin-bottom: ${pr => pr.theme.cardSpacing};
     cursor: pointer;
     
     &:hover {
-        
-    background: ${(pr) => pr.theme.tertiaryColor};
-  }
+        background: ${pr => pr.theme.tertiaryColor};
+    }
 
   .card-header {
     display: flex;
+    flex-flow: column wrap;
     align-items: center;
     justify-content: space-between;
     margin: 0% 10%;
 
-    h4 {
-      font-size: 1.3rem;
+    /* border: thin black solid; */
+
+    .header-top-row {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: space-between;
+
+        /* border: thin black solid; */
+        h4 {
+            font-size: 1.8rem;
+        }
+        p {
+            font-size: 0.9rem;
+        }
     }
-  }
 
-  .card-content {
-    /* background: ${(pr) => pr.theme.primaryColor}; */
-    margin: 1rem 1rem;
-    text-align: left;
+    .attendees {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        align-content: center;
+    }
+}
 
-    border: thin black solid;
-  }
+    .card-content {
+        /* background: ${(pr) => pr.theme.primaryColor}; */
+        margin: 1rem 1rem;
+        text-align: left;
+    }
 `;
 const getDate = (date) => {
   // var data is passed as a str mm-dd-yyyy
   let dateArr = date.split("-");
-  let day = dateArr[1].split("");
+  let day = dateArr[2].split("");
   let ending;
 
   if (day.length > 1) day = parseInt(day[day.length - 1]);
-  else day = parseInt(dateArr[1]);
+  else day = parseInt(dateArr[2]);
 
-  if (day < 4) {
+  if (day < 4 && day !== 0) {
     ending = day === 1 ? "st" : day === 2 ? "nd" : "rd";
   } else {
     ending = "th";
   }
 
-  if (dateArr[0] === "1") {
-    dateArr[0] = "January";
-  } else if (dateArr[0] === "2") {
-    dateArr[0] = "February";
-  } else if (dateArr[0] === "3") {
-    dateArr[0] = "March";
-  } else if (dateArr[0] === "4") {
-    dateArr[0] = "April";
-  } else if (dateArr[0] === "5") {
-    dateArr[0] = "May";
-  } else if (dateArr[0] === "6") {
-    dateArr[0] = "June";
-  } else if (dateArr[0] === "7") {
-    dateArr[0] = "July";
-  } else if (dateArr[0] === "8") {
-    dateArr[0] = "August";
-  } else if (dateArr[0] === "9") {
-    dateArr[0] = "September";
-  } else if (dateArr[0] === "10") {
-    dateArr[0] = "October";
-  } else if (dateArr[0] === "11") {
-    dateArr[0] = "November";
-  } else if (dateArr[0] === "12") {
-    dateArr[0] = "December";
+  if (dateArr[1] === "1") {
+    dateArr[1] = "January";
+  } else if (dateArr[1] === "2") {
+    dateArr[1] = "February";
+  } else if (dateArr[1] === "3") {
+    dateArr[1] = "March";
+  } else if (dateArr[1] === "4") {
+    dateArr[1] = "April";
+  } else if (dateArr[1] === "5") {
+    dateArr[1] = "May";
+  } else if (dateArr[1] === "6") {
+    dateArr[1] = "June";
+  } else if (dateArr[1] === "7") {
+    dateArr[1] = "July";
+  } else if (dateArr[1] === "8") {
+    dateArr[1] = "August";
+  } else if (dateArr[1] === "9") {
+    dateArr[1] = "September";
+  } else if (dateArr[1] === "10") {
+    dateArr[1] = "October";
+  } else if (dateArr[1] === "11") {
+    dateArr[1] = "November";
+  } else if (dateArr[1] === "12") {
+    dateArr[1] = "December";
   } else {
-    dateArr[0] = null;
+    dateArr[1] = null;
   }
-  return `${dateArr[0]} ${dateArr[1]}${ending} of ${dateArr[2]}`;
+  return `${dateArr[1]} ${dateArr[2]}${ending} of ${dateArr[0]}`;
 };
 
 const initialFoodObject = {
@@ -236,12 +255,18 @@ const PotluckCard = (props) => {
 
   return (
     <CardContainer className="potluck-card" onClick={clickHandle}>
-      <h4>{`${potluck_name}`}</h4>
-      <h6>{`Organizer: ${organizer}`}</h6>
-      <h6>{`Guests: ${guestList
-        .map((guest) => guest.username)
-        .join(", ")}`}</h6>
-      <p>{date}</p>
+      <div className='card-header'>
+        <div className='header-top-row'>
+          <h4>{`${potluck_name}`}</h4>
+          <p>{getDate(date)}</p>
+        </div>
+        <div className='attendees'>
+          <h6>{`Organizer: ${organizer}`}</h6>
+          <h6>{`Guests: ${guestList
+                .map((guest) => guest.username)
+                .join(", ")}`}</h6>
+        </div>
+      </div>
       {moreDetails && (
         <div>
           {props.potluckStatus === "my-potlucks" ? (
