@@ -9,22 +9,30 @@ import PotluckCard from './PotluckCard'
 const MainContainer = styled.div`
     /* border: 1px solid red; */
     display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-
-    .separating-line {
-        width:  90vw;
-        margin: 2.5rem auto;
-        border-bottom: 2px solid ${pr => pr.theme.primaryColor};
-    }
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    color: ${pr => pr.theme.defaultTextColor};
 
     .container {
+        width: 50%;
         display: flex;
-        flex-flow: row wrap;
-        align-items: flex-start;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        /* padding: 1rem 0; */
+    }
+
+    .my-potlucks {
+        width: 95%;
+    }
+    .guest-potlucks {
+        width: 95%;
+    }
+    h3 {
+        padding: 1rem 1rem;
     }
 `
-
 
 const PotlucksList = (props) => {
     const [ myPotlucks, setMyPotlucks] = useState([])
@@ -35,6 +43,9 @@ const PotlucksList = (props) => {
         // load in potlucks that we have
         // load in potlucks that we are invited to
         // set potlucksList to 
+        axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/auth/users`)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
 
         axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/api/potlucks`)
         .then(res => {
@@ -72,18 +83,32 @@ const PotlucksList = (props) => {
         console.log(guestPotlucks)
     }
 
+    const deletePotluck = (id) => {
+        setMyPotlucks(myPotlucks.filter(potluck => potluck.id !== id))
+    }
+
     return (
         <MainContainer className="potlucks-container">
-            <h3>My Potlucks</h3>
-            <div className="my-potlucks container">
-                {myPotlucks && (
-                    myPotlucks.map(potluck => <PotluckCard key={potluck.id+potluck.date} potluckInfo={potluck} potluckStatus='my-potlucks'/>)
+            <div className='container'>
+                <h3>My Potlucks</h3>
+                <div className="my-potlucks">
+                    {myPotlucks && (
+                    myPotlucks.map(potluck => 
+                    <PotluckCard 
+                    key={potluck.id+potluck.date} 
+                    potluckInfo={potluck} 
+                    myPotlucks={myPotlucks}
+                    submitEdit={submitEdit}
+                    setMyPotlucks={setMyPotlucks}
+                    deletePotluck={deletePotluck}
+                    potluckStatus='my-potlucks'/>)
                 )}
+                </div>
             </div>
-            {guestPotlucks && <span className='separating-line'/>}
-            <h3>My Friend's Potlucks</h3>
-            <div className="guest-potlucks container">
-                {guestPotlucks && (
+            <div className='container'>
+                <h3>My Friend's Potlucks</h3>
+                <div className="guest-potlucks">
+                    {guestPotlucks && (
                     guestPotlucks
                     .map(potluck => 
                     <PotluckCard 
@@ -93,6 +118,7 @@ const PotlucksList = (props) => {
                     setguestPotlucks={setguestPotlucks} 
                     potluckStatus='guest-potlucks'/>)
                 )}
+                </div>
             </div>
         </MainContainer>
     )
