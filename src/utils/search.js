@@ -4,6 +4,7 @@ export const searchUsername = ( username ) => {
     return(
         axiosWithAuth().get(`https://mplga-tt-webft-49.herokuapp.com/auth/users`)
         .then(res => {
+            
             // returns a user object
             const userObject = {...(res.data.filter(user => user.username === username)[0])}
             return userObject
