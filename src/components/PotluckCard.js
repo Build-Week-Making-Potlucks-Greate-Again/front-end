@@ -67,23 +67,58 @@ const CardContainer = styled.div`
         .details {
             width: 80%;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: space-between;
+            align-items: flex-end;
+
             .info-container {
                 width: 70%;
                 text-align: left;
                 line-height: 1.7rem;
+
             }
-    
+            
+            .checkbox-container {
+                width: 100%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: space-evenly;
+                padding: 0.2rem 0;
+                
+                span {
+                    width: 50%;
+                    display: inline-block;
+                }
+            }
+
             form {
                 display: flex;
                 flex-flow: column wrap;
-                width: 50%;
-                /* padding: 1rem 3rem; */
+                width: 70%;
                 text-align: left;
-    
-                /* border: thin black solid; */
             }
+        }
+    }
+    .button-container {
+        width: 100%;
+        padding: 0.2rem 0;
+        display: flex;
+        justify-content: space-between;
+        
+        button {
+            border: none;
+            text-align: center;
+            color: #ffffff;
+            display: inline;
+            padding: 0.3rem 0.3rem;
+            background-color: ${pr => pr.theme.primaryColor};
+            font-size: 1rem;
+            box-shadow: 1px 1px 3px black;
+            
+        }
+        button:hover {
+            background-color: ${pr => pr.theme.secondaryColor};
+            box-shadow: 2px 2px 5px black;
         }
     }
 `;
@@ -411,23 +446,25 @@ const PotluckCard = (props) => {
                 ) : (
                 <>
                     <div className='info-container'>
-                    <p>Time: {time}</p>
-                    <p>Location: {location}</p>
+                      <p>Time: {time}</p>
+                      <p>Location: {location}</p>
                     </div>
                     <form onSubmit={onSubmit}>
-                    {foodItems.map((item) => (
-                        <span key={item.food_name}>
-                        <input
-                            type="checkbox"
-                            id={item.selectedBy}
-                            name={item.food_name}
-                            checked={item["selected?"]}
-                            onChange={onChange}
-                        />
-                        <label for={item.food_name}> {item.food_name.replace(/^\w/, (c) => c.toUpperCase())}</label>
-                        </span>
-                    ))}
-                    <div>
+                      <div className='checkbox-container'>
+                        {foodItems.map((item) => (
+                            <span key={item.food_name}>
+                            <input
+                                type="checkbox"
+                                id={item.selectedBy}
+                                name={item.food_name}
+                                checked={item["selected?"]}
+                                onChange={onChange}
+                            />
+                            <label for={item.food_name}> {item.food_name.replace(/^\w/, (c) => c.toUpperCase())}</label>
+                            </span>
+                        ))}
+                      </div>
+                    <div className='button-container'>
                         <button>Submit</button>
                         <button onClick={editPotluck}>Edit</button>
                         <button onClick={onDelete}>Delete</button>
@@ -438,8 +475,10 @@ const PotluckCard = (props) => {
                 )
             ) : (
                 <>
-                <p>Time: {time}</p>
-                <p>Location: {location}</p>
+                <div className='info-container'>
+                  <p>Time: {time}</p>
+                  <p>Location: {location}</p>
+                </div>
                 <form onSubmit={onSubmit}>
                     {foodItems.map((item) => (
                     <span key={item.food_name}>
