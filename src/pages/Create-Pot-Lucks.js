@@ -86,8 +86,9 @@ function CreatePotLucks() {
         axiosWithAuth().post(`https://mplga-tt-webft-49.herokuapp.com/api/potluck`, newPotLuck)
         .then(res => console.log(res.data))
         .catch(err => {
-            debugger
+            // debugger
             console.log(`Unable to Post Potluck`)
+            console.log(err)
         })
 
         

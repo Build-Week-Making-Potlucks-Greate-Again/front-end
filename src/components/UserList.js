@@ -19,6 +19,7 @@ function UserList({userList, formValues, guestId, setGuestId}) {
         }
 
         console.log(svgClick)
+        
         searchUsername(svgClick)
         .then(res => {
             console.log(res)
