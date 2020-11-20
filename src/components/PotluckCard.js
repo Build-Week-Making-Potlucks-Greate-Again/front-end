@@ -61,6 +61,32 @@ const CardContainer = styled.div`
         margin: 1rem 1rem;
         text-align: left;
     }
+
+    .details {
+        /* border: thin black solid; */
+
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem 3rem;
+
+
+        .info-container {
+            width: 70%;
+            text-align: left;
+
+            /* border: thin black solid; */
+        }
+
+        form {
+            display: flex;
+            flex-flow: column wrap;
+            width: 50%;
+            /* padding: 1rem 3rem; */
+            text-align: left;
+
+            /* border: thin black solid; */
+        }
+    }
 `;
 
 window.addEventListener("mouseenter", e => {
@@ -290,7 +316,7 @@ const PotluckCard = (props) => {
         </div>
       </div>
       {moreDetails && (
-        <div>
+        <div className='details'>
           {props.potluckStatus === "my-potlucks" ? (
             edit ? (
               <>
@@ -384,8 +410,10 @@ const PotluckCard = (props) => {
               </>
             ) : (
               <>
-                <p>Time: {time}</p>
-                <p>Location: {location}</p>
+                <div className='info-container'>
+                  <p>Time: {time}</p>
+                  <p>Location: {location}</p>
+                </div>
                 <form onSubmit={onSubmit}>
                   {foodItems.map((item) => (
                     <span key={item.food_name}>
@@ -396,7 +424,7 @@ const PotluckCard = (props) => {
                         checked={item["selected?"]}
                         onChange={onChange}
                       />
-                      <label for={item.food_name}>{item.food_name}</label>
+                      <label for={item.food_name}> {item.food_name.replace(/^\w/, (c) => c.toUpperCase())}</label>
                     </span>
                   ))}
                   <div>
