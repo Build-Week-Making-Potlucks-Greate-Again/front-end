@@ -130,7 +130,7 @@ function CreateForm(props) {
                 </div>
             </div>
         
-            <button onClick={onSubmit}>Submit</button>
+            <button className="btnSbt" onClick={onSubmit}>Submit</button>
         </StyledForm>
     );
 }
@@ -152,7 +152,7 @@ export default CreateForm
 //     })
 
 // }
-
+ 
 
 // const userSubmit = (e) => {
 //     e.preventDefault();

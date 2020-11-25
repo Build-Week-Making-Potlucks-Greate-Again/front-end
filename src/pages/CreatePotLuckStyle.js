@@ -33,6 +33,22 @@ export const StyledForm = styled.form`
         justify-content: space-evenly;
     }
 
+    .btnSbt{
+        padding: 10px 12px;
+        background-color: black;
+        color: white;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        font-weight: 300;
+        margin-top: 10px;
+
+        &:hover{
+            background-color: pink;
+            color: black;
+        }
+    }
+
     .mainInfo {
         /* background-color: green; */
         flex-basis: 50%;
@@ -91,12 +107,15 @@ export const StyledForm = styled.form`
             margin-top: 10px;
             width: 100%;
             height: 300px;
-            background-color: black;
+
+            background-color: #0F0F1F;
+
             padding: 10px;
             overflow: auto;
 
             li {
-                background-color: blue;
+                background-color: #131F3F;
+                border: 1px solid rgba(255,255,255,.1);
                 padding: 5px;
                 margin-bottom: 10px;
                 font-size: 1.5rem;
@@ -149,10 +168,17 @@ export const StyledForm = styled.form`
                 font-size: 12px;
                 background-color: rgba(255, 217, 0, 0.349);
                 border: none;
+                &:hover{
+                    background-color: black;
+                    color: white;
+                }
             }
         }
         ul{
-            background-color: orange;
+            padding: 10px;
+
+            background-color: #0F0F1F;
+
             list-style-type: none;
             display: flex;
             flex-direction: column;
@@ -160,7 +186,8 @@ export const StyledForm = styled.form`
             justify-content: center;
 
             li{
-                background-color: black;
+                background-color: #131F3F;
+                border: 1px solid rgba(255,255,255,.1);
                 width: 500px;
                 padding: 10px;
                 display: flex;
