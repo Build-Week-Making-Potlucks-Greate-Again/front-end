@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import axiosWithAuth from '../validation/AxiosAuthorization';
 import registerSchema from '../validation/registerSchema'
 import * as yup from 'yup'
 
@@ -65,7 +64,7 @@ const Register = (props) => {
                 console.log(`Success, Please Log-in with registered account`)
             })
             .catch(err => console.log(err));
-        
+        setLogin(initialValues)
     }
 
     return (
